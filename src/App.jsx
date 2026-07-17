@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
+  Article,
   ArrowRight,
   ArrowUp,
   At,
@@ -15,6 +16,7 @@ import {
   FolderOpen,
   GearSix,
   GitBranch,
+  GithubLogo,
   Image as ImageIcon,
   List,
   MagnifyingGlass,
@@ -81,6 +83,53 @@ const projects = [
     details: ["핵심 운영 지표 우선순위 설계", "반복 프로비저닝 작업 자동화", "상태 변화와 실행 기록의 추적성 확보"],
   },
 ];
+
+const rolePhrase = "클라우드 & 인프라 엔지니어";
+
+function TypewriterRole() {
+  const [displayedText, setDisplayedText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [reduceMotion, setReduceMotion] = useState(
+    () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
+
+  useEffect(() => {
+    const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updateMotionPreference = () => setReduceMotion(motionPreference.matches);
+
+    motionPreference.addEventListener("change", updateMotionPreference);
+    return () => motionPreference.removeEventListener("change", updateMotionPreference);
+  }, []);
+
+  useEffect(() => {
+    if (reduceMotion) {
+      setDisplayedText(rolePhrase);
+      setIsDeleting(false);
+      return undefined;
+    }
+
+    let delay = isDeleting ? 42 : 76;
+    let updateText;
+
+    if (!isDeleting && displayedText === rolePhrase) {
+      delay = 1450;
+      updateText = () => setIsDeleting(true);
+    } else if (isDeleting && displayedText === "") {
+      delay = 280;
+      updateText = () => setIsDeleting(false);
+    } else {
+      updateText = () => {
+        const nextLength = displayedText.length + (isDeleting ? -1 : 1);
+        setDisplayedText(rolePhrase.slice(0, nextLength));
+      };
+    }
+
+    const timeout = window.setTimeout(updateText, delay);
+    return () => window.clearTimeout(timeout);
+  }, [displayedText, isDeleting, reduceMotion]);
+
+  return <span className="typing-role" aria-hidden="true">{displayedText}</span>;
+}
 
 function WindowControls() {
   return (
@@ -407,16 +456,38 @@ export function App() {
                 <div className="profile-copy">
                   <p className="terminal-prompt"><span>root@devconsole</span>:~$ ./whoami.sh</p>
                   <p className="eyebrow">PROFILE / CLOUD INFRASTRUCTURE</p>
-                  <h1 id="profile-title">김재환<span>클라우드 &amp; 인프라<br />엔지니어</span></h1>
+                  <h1 id="profile-title" aria-label="김재환 — 클라우드 & 인프라 엔지니어">
+                    김재환
+                    <TypewriterRole />
+                  </h1>
                   <p className="hero-description">
-                    복잡한 인프라를 안정적으로 운영 가능한 플랫폼으로 바꿉니다. 프라이빗 클라우드부터 자동화와 관찰 가능성까지, 구조와 운영 경험을 함께 설계합니다.
+                    복잡한 인프라를 안정적으로 운영 가능한 플랫폼으로 바꿉니다.
                   </p>
                   <ul className="tag-list hero-tags" aria-label="핵심 기술">
                     <li>OpenStack</li><li>Ceph</li><li>Kubernetes</li><li>Terraform</li><li>Ansible</li>
                   </ul>
-                  <a className="inline-link" href="#experience" onClick={(event) => navigateTo(event, "experience")}>
-                    경험 로그 열기 <ArrowRight weight="bold" aria-hidden="true" />
-                  </a>
+                  <div className="profile-links" aria-label="외부 프로필 링크">
+                    <a
+                      className="profile-link"
+                      href="https://github.com/jaehwan01101"
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label="김재환 GitHub 새 탭에서 열기"
+                    >
+                      <GithubLogo weight="fill" aria-hidden="true" />
+                      <span>GitHub</span>
+                    </a>
+                    <a
+                      className="profile-link"
+                      href="https://velog.io/@o980204/posts"
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label="김재환 블로그 새 탭에서 열기"
+                    >
+                      <Article weight="bold" aria-hidden="true" />
+                      <span>Blog</span>
+                    </a>
+                  </div>
                 </div>
 
                 <figure className="profile-file">
