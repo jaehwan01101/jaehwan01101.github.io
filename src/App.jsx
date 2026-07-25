@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   Article,
-  ArrowRight,
   ArrowUp,
   At,
   BracketsCurly,
@@ -88,11 +87,6 @@ const projects = [
       "CloudWatch", "Prometheus", "Grafana", "IAM", "KMS", "Secrets Manager",
       "SSM", "VPC Endpoint", "Amazon Bedrock",
     ],
-    metrics: [
-      { value: "1분 내", label: "Multi-AZ RTO" },
-      { value: "거의 0", label: "RPO" },
-      { value: "5명", label: "Team" },
-    ],
     details: [
       "사용자 트래픽과 요구사항을 기준으로 RDS 스펙과 확장 방향을 산정",
       "RDS MySQL Multi-AZ, RDS Proxy, 자동 백업·PITR 기반 장애 대응 구조 설계",
@@ -123,11 +117,6 @@ const projects = [
       "Liveness/Readiness Probe", "Rolling Update", "ConfigMap", "Secret",
       "MySQL", "GTID Replication", "Keepalived", "Redis", "Longhorn",
       "Prometheus", "Grafana", "Alertmanager", "JMeter", "Discord Webhook",
-    ],
-    metrics: [
-      { value: "2 → 10", label: "Pods" },
-      { value: "210 → 8ms", label: "응답 시간" },
-      { value: "1,200 → 72", label: "MySQL QPS" },
     ],
     details: [
       "Metrics Server와 HPA를 구성해 JMeter 부하 시 Pod 자동 확장·축소 흐름 검증",
@@ -215,71 +204,75 @@ function SectionLink({ section, active, onNavigate }) {
 
 function ProjectCard({ project }) {
   const [expanded, setExpanded] = useState(false);
+  const contentId = `${project.id}-content`;
 
   return (
-    <article className="project-card">
+    <article className={`project-card ${expanded ? "is-expanded" : ""}`}>
       <div className="project-heading">
         <div>
           <p className="eyebrow">{project.spec}</p>
           <h3>{project.title}</h3>
         </div>
-        <span className="status-chip">
-          <CheckCircle weight="fill" aria-hidden="true" />
-          Documented
-        </span>
+        <div className="project-heading-actions">
+          <span className="status-chip">
+            <CheckCircle weight="fill" aria-hidden="true" />
+            Documented
+          </span>
+          <button
+            className="project-toggle"
+            type="button"
+            aria-expanded={expanded}
+            aria-controls={contentId}
+            onClick={() => setExpanded((value) => !value)}
+          >
+            {expanded ? "프로젝트 접기" : "프로젝트 펼치기"}
+            <CaretDown aria-hidden="true" weight="bold" />
+          </button>
+        </div>
       </div>
 
-      <figure className="project-figure">
-        <figcaption>
-          <span><ImageIcon aria-hidden="true" /> {project.imageLabel}</span>
-          <span className="figure-format">16:9</span>
-        </figcaption>
-        <div className="project-image-wrap">
-          <img
-            className={`project-image project-image-${project.fit}`}
-            src={project.image}
-            alt={project.imageAlt}
-            loading="lazy"
-          />
-        </div>
-      </figure>
-
-      <div className="project-body">
-        <div className="project-summary">
-          <p className="project-summary-label">REQUIREMENTS / ARCHITECTURE</p>
-          <p className="project-description">{project.description}</p>
-          <ul className="project-overview">
-            {project.overview.map((item) => <li key={item}>{item}</li>)}
-          </ul>
-        </div>
-        <dl className="project-metrics" aria-label={`${project.title} 검증 수치`}>
-          {project.metrics.map((metric) => (
-            <div key={metric.label}>
-              <dt>{metric.value}</dt>
-              <dd>{metric.label}</dd>
-            </div>
-          ))}
-        </dl>
-        <p className="project-stack-label">TECH STACK</p>
-        <ul className="tag-list" aria-label={`${project.title} 기술 스택`}>
-          {project.tags.map((tag) => <li key={tag}>{tag}</li>)}
+      <div className="project-preview">
+        <p>{project.description}</p>
+        <ul className="tag-list" aria-label={`${project.title} 주요 기술 스택`}>
+          {project.tags.slice(0, 6).map((tag) => <li key={tag}>{tag}</li>)}
         </ul>
-        <button
-          className="detail-button"
-          type="button"
-          aria-expanded={expanded}
-          aria-controls={`${project.id}-details`}
-          onClick={() => setExpanded((value) => !value)}
-        >
-          {expanded ? "담당 내용 닫기" : "담당 내용 보기"}
-          <ArrowRight className={expanded ? "is-rotated" : ""} weight="bold" aria-hidden="true" />
-        </button>
-        <div id={`${project.id}-details`} className="project-details" hidden={!expanded}>
-          <ul>
-            {project.details.map((detail) => (
-              <li key={detail}><CheckCircle weight="fill" aria-hidden="true" />{detail}</li>
-            ))}
+      </div>
+
+      <div id={contentId} className="project-expanded-content" hidden={!expanded}>
+        <figure className="project-figure">
+          <figcaption>
+            <span><ImageIcon aria-hidden="true" /> {project.imageLabel}</span>
+            <span className="figure-format">16:9</span>
+          </figcaption>
+          <div className="project-image-wrap">
+            <img
+              className={`project-image project-image-${project.fit}`}
+              src={project.image}
+              alt={project.imageAlt}
+              loading="lazy"
+            />
+          </div>
+        </figure>
+
+        <div className="project-body">
+          <div className="project-summary">
+            <p className="project-summary-label">REQUIREMENTS / ARCHITECTURE</p>
+            <ul className="project-overview">
+              {project.overview.map((item) => <li key={item}>{item}</li>)}
+            </ul>
+          </div>
+          <p className="project-stack-label">TECH STACK</p>
+          <ul className="tag-list" aria-label={`${project.title} 전체 기술 스택`}>
+            {project.tags.map((tag) => <li key={tag}>{tag}</li>)}
           </ul>
+          <div className="project-details">
+            <p className="project-summary-label">MY CONTRIBUTION</p>
+            <ul>
+              {project.details.map((detail) => (
+                <li key={detail}><CheckCircle weight="fill" aria-hidden="true" />{detail}</li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </article>
@@ -560,6 +553,18 @@ export function App() {
                     </a>
                   </div>
                 </div>
+
+                <figure className="profile-file">
+                  <figcaption>
+                    <span><ImageIcon aria-hidden="true" /> profile-jaehwan.jpg</span>
+                    <span>398 × 512</span>
+                  </figcaption>
+                  <div className="portrait-wrap">
+                    <img src="/assets/profile-jaehwan.jpg" alt="김재환 프로필 사진" />
+                  </div>
+                  <p><span>FOCUS</span> Cloud &amp; Infrastructure</p>
+                  <p><span>BASE</span> Seoul, South Korea</p>
+                </figure>
 
               </div>
             </section>
