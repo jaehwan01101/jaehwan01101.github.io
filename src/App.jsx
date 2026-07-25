@@ -30,8 +30,8 @@ const sections = [
   { id: "profile", label: "Profile", file: "profile.md", icon: User },
   {
     id: "experience",
-    label: "Journey",
-    file: "journey.log",
+    label: "Growth",
+    file: "growth.log",
     icon: ClockCounterClockwise,
   },
   { id: "projects", label: "Projects", file: "projects.json", icon: Cube },
@@ -71,11 +71,23 @@ const projects = [
     spec: "PROJECT: 01 / 2026.05 — 2026.07",
     title: "SecureVoiceGuard AWS 전환",
     description:
-      "AI 음성 위변조 탐지 서비스의 단일 서버 구조를 AWS 관리형 서비스 기반으로 재설계한 5인 프로젝트입니다. DB 인프라 고도화와 운영 체계를 담당했습니다.",
+      "AI 음성 위변조 탐지 서비스의 단일 서버 구조를 트래픽 증가, AI 추론 부하, 장애 복구와 반복 배포에 대응할 수 있는 AWS 관리형 아키텍처로 전환한 5인 프로젝트입니다.",
+    overview: [
+      "CloudFront와 AWS WAF를 외부 진입점으로 두고, ALB를 거쳐 Private Subnet의 ECS Fargate API·AI Worker로 연결되는 3-Tier 요청 경로를 설계했습니다.",
+      "정적 콘텐츠·음성 파일·AI 모델은 S3에 저장하고, Free/Paid SQS와 DLQ로 작업을 분리해 ECS Fargate AI Worker가 모델을 불러와 비동기 추론하도록 구성했습니다.",
+      "RDS MySQL Multi-AZ와 RDS Proxy로 데이터 계층을 분리하고, Jenkins·GitHub·ECR·ECS 배포 파이프라인으로 API와 Worker의 컨테이너 배포를 자동화했습니다.",
+      "CloudWatch·Prometheus·Grafana 모니터링, Terraform IaC, IAM·KMS·Secrets Manager·SSM을 함께 적용해 관측성·복구성·보안 요구사항을 운영 구조에 포함했습니다.",
+    ],
     image: "/assets/projects/securevoice-architecture.png",
+    imageLabel: "aws-overall-architecture.png",
     imageAlt: "SecureVoiceGuard의 CloudFront, ECS Fargate, SQS, RDS 기반 AWS 아키텍처",
     fit: "contain",
-    tags: ["AWS", "RDS MySQL", "RDS Proxy", "Terraform", "CloudWatch"],
+    tags: [
+      "AWS", "CloudFront", "AWS WAF", "ALB", "ECS Fargate", "ECR", "Docker",
+      "S3", "SQS", "RDS MySQL", "RDS Proxy", "Jenkins", "GitHub", "Terraform",
+      "CloudWatch", "Prometheus", "Grafana", "IAM", "KMS", "Secrets Manager",
+      "SSM", "VPC Endpoint", "Amazon Bedrock",
+    ],
     metrics: [
       { value: "1분 내", label: "Multi-AZ RTO" },
       { value: "거의 0", label: "RPO" },
@@ -94,11 +106,24 @@ const projects = [
     spec: "PROJECT: 02 / 2026.03.01 — 2026.03.16",
     title: "OnPremises-MZC 티켓팅 인프라",
     description:
-      "명절 예매 트래픽을 가정한 5인 Kubernetes 인프라 프로젝트입니다. 오토스케일링, 서비스 안정성, 설정 분리, 캐시와 영속 스토리지를 담당했습니다.",
-    image: "/assets/projects/onprem-hpa.png",
-    imageAlt: "JMeter 부하에 따라 Kubernetes Pod가 자동 확장되는 HPA 검증 결과",
+      "명절 예매 시점의 트래픽 폭증, 단일 장비 장애, 데이터 유실과 수동 장애 대응 문제를 해결하기 위해 네트워크부터 애플리케이션·데이터·관측 계층까지 통합 설계한 5인 프로젝트입니다.",
+    overview: [
+      "GNS3 기반 Front·Container·Data 3-Zone을 구성하고 HSRP 이중화 라우터, Bastion Host, Nginx Reverse Proxy·WAF·TLS·Rate Limit으로 진입 경로와 계층 간 접근을 통제했습니다.",
+      "3-Node Kubernetes 클러스터에 FastAPI 서비스를 배포하고 HPA·Metrics Server, Liveness/Readiness Probe, Rolling Update, ConfigMap·Secret으로 확장성과 자가 치유·설정 분리를 구현했습니다.",
+      "MySQL GTID Master/Slave와 Keepalived VIP로 DB 장애 전환 구조를 만들고, Redis Cache-Aside와 Longhorn PVC로 조회 성능과 상태 저장 데이터의 영속성을 확보했습니다.",
+      "Prometheus·Grafana·Alertmanager와 Discord Webhook으로 Kubernetes·MySQL·Redis 지표를 수집하고, JMeter 부하 및 장애 시나리오로 전체 운영 흐름을 검증했습니다.",
+    ],
+    image: "/assets/projects/onprem-architecture.png",
+    imageLabel: "onprem-logical-architecture.png",
+    imageAlt: "Kubernetes, Redis, Longhorn, MySQL, Prometheus와 Grafana를 포함한 온프레미스 전체 논리 아키텍처",
     fit: "contain",
-    tags: ["Kubernetes", "HPA", "Redis", "Longhorn", "JMeter"],
+    tags: [
+      "GNS3", "Cisco IOS", "HSRP", "Nginx", "ModSecurity WAF", "TLS/HTTPS",
+      "Kubernetes", "Docker", "FastAPI", "HPA", "Metrics Server",
+      "Liveness/Readiness Probe", "Rolling Update", "ConfigMap", "Secret",
+      "MySQL", "GTID Replication", "Keepalived", "Redis", "Longhorn",
+      "Prometheus", "Grafana", "Alertmanager", "JMeter", "Discord Webhook",
+    ],
     metrics: [
       { value: "2 → 10", label: "Pods" },
       { value: "210 → 8ms", label: "응답 시간" },
@@ -206,7 +231,7 @@ function ProjectCard({ project }) {
 
       <figure className="project-figure">
         <figcaption>
-          <span><ImageIcon aria-hidden="true" /> preview.png</span>
+          <span><ImageIcon aria-hidden="true" /> {project.imageLabel}</span>
           <span className="figure-format">16:9</span>
         </figcaption>
         <div className="project-image-wrap">
@@ -220,7 +245,13 @@ function ProjectCard({ project }) {
       </figure>
 
       <div className="project-body">
-        <p>{project.description}</p>
+        <div className="project-summary">
+          <p className="project-summary-label">REQUIREMENTS / ARCHITECTURE</p>
+          <p className="project-description">{project.description}</p>
+          <ul className="project-overview">
+            {project.overview.map((item) => <li key={item}>{item}</li>)}
+          </ul>
+        </div>
         <dl className="project-metrics" aria-label={`${project.title} 검증 수치`}>
           {project.metrics.map((metric) => (
             <div key={metric.label}>
@@ -229,6 +260,7 @@ function ProjectCard({ project }) {
             </div>
           ))}
         </dl>
+        <p className="project-stack-label">TECH STACK</p>
         <ul className="tag-list" aria-label={`${project.title} 기술 스택`}>
           {project.tags.map((tag) => <li key={tag}>{tag}</li>)}
         </ul>
@@ -529,14 +561,6 @@ export function App() {
                   </div>
                 </div>
 
-                <figure className="profile-file">
-                  <figcaption><ImageIcon aria-hidden="true" /> profile-jaehwan.jpg <span>398 × 512</span></figcaption>
-                  <div className="portrait-wrap">
-                    <img src="/assets/profile-jaehwan.jpg" alt="김재환 프로필 사진" />
-                  </div>
-                  <p><span>FOCUS</span> Cloud &amp; Infrastructure</p>
-                  <p><span>BASE</span> Seoul, South Korea</p>
-                </figure>
               </div>
             </section>
 
@@ -544,8 +568,8 @@ export function App() {
               <LineRail start={27} count={26} />
               <div className="section-content">
                 <div className="section-heading">
-                  <div><p className="eyebrow">JOURNEY.LOG</p><h2 id="experience-title">보안 검토에서 클라우드 운영까지</h2></div>
-                  <span className="section-command">$ tail -f journey.log</span>
+                  <div><p className="eyebrow">GROWTH.LOG</p><h2 id="experience-title">성장 과정</h2></div>
+                  <span className="section-command">$ tail -f growth.log</span>
                 </div>
                 <div className="timeline">
                   {experience.map((item) => (
