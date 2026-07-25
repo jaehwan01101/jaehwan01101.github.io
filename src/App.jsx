@@ -527,8 +527,17 @@ export function App() {
                     가용성·확장성·보안·복구 가능성을 함께 고민하고,
                     검증 결과와 운영 기준을 문서로 남기는 클라우드 엔지니어를 지향합니다.
                   </p>
-                  <ul className="tag-list hero-tags" aria-label="핵심 기술">
-                    <li>AWS</li><li>Kubernetes</li><li>Terraform</li><li>Network</li><li>Monitoring</li>
+                  <ul className="tag-list hero-tags" aria-label="기술 역량">
+                    <li>Network</li>
+                    <li>AWS</li>
+                    <li>Kubernetes / Container</li>
+                    <li>CI/CD / GitOps</li>
+                    <li>Python Automation</li>
+                    <li>Database / Cache</li>
+                    <li>GCP / GKE / Multi-Cloud</li>
+                    <li>Linux</li>
+                    <li>Terraform / IaC</li>
+                    <li>Monitoring</li>
                   </ul>
                   <div className="profile-links" aria-label="외부 프로필 링크">
                     <a
