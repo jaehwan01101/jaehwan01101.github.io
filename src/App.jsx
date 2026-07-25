@@ -528,16 +528,26 @@ export function App() {
                     검증 결과와 운영 기준을 문서로 남기는 클라우드 엔지니어를 지향합니다.
                   </p>
                   <ul className="tag-list hero-tags" aria-label="기술 역량">
-                    <li>Network</li>
                     <li>AWS</li>
-                    <li>Kubernetes / Container</li>
-                    <li>CI/CD / GitOps</li>
-                    <li>Python Automation</li>
-                    <li>Database / Cache</li>
-                    <li>GCP / GKE / Multi-Cloud</li>
+                    <li>GCP</li>
+                    <li>GKE</li>
+                    <li>Kubernetes</li>
+                    <li>Docker</li>
+                    <li>Terraform</li>
+                    <li>Jenkins</li>
+                    <li>GitHub Actions</li>
+                    <li>Argo CD</li>
+                    <li>Python</li>
+                    <li>boto3</li>
                     <li>Linux</li>
-                    <li>Terraform / IaC</li>
-                    <li>Monitoring</li>
+                    <li>GNS3</li>
+                    <li>Cisco Packet Tracer</li>
+                    <li>MySQL</li>
+                    <li>PostgreSQL</li>
+                    <li>Redis</li>
+                    <li>Longhorn</li>
+                    <li>Prometheus</li>
+                    <li>Grafana</li>
                   </ul>
                   <div className="profile-links" aria-label="외부 프로필 링크">
                     <a
