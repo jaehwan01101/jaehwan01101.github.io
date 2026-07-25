@@ -394,6 +394,37 @@ kbd {
 .project-image-cover { object-fit: cover; object-position: center; filter: saturate(.78) contrast(1.05); }
 .project-body { padding: 18px; }
 .project-body > p { min-height: 50px; margin-bottom: 15px; color: #515966; font-size: 13px; line-height: 1.65; }
+.project-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0 0 15px;
+}
+.project-metrics div {
+  min-width: 0;
+  border: 1px solid #d4deea;
+  border-radius: 5px;
+  background: var(--surface-blue);
+  padding: 9px 8px;
+}
+.project-metrics dt {
+  overflow: hidden;
+  color: var(--primary-dark);
+  font-family: var(--font-mono);
+  font-size: clamp(12px, 1.2vw, 16px);
+  font-weight: 800;
+  letter-spacing: -.04em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.project-metrics dd {
+  margin: 2px 0 0;
+  color: #747c87;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .03em;
+}
 .project-body .tag-list { margin-bottom: 15px; }
 .detail-button { border: 0; background: transparent; padding: 4px 0; cursor: pointer; }
 .detail-button svg.is-rotated { transform: rotate(90deg); }
@@ -481,6 +512,9 @@ kbd {
   .project-image-wrap { height: 220px; }
   .project-body { padding: 15px; }
   .project-body > p { min-height: 0; }
+  .project-metrics { grid-template-columns: 1fr; }
+  .project-metrics div { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; }
+  .project-metrics dd { text-align: right; }
   .contact-grid { gap: 30px; }
   .contact-card { padding: 18px; }
   .contact-card dl div { grid-template-columns: 1fr; gap: 2px; }

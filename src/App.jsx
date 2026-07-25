@@ -30,8 +30,8 @@ const sections = [
   { id: "profile", label: "Profile", file: "profile.md", icon: User },
   {
     id: "experience",
-    label: "Experience",
-    file: "experience.log",
+    label: "Journey",
+    file: "journey.log",
     icon: ClockCounterClockwise,
   },
   { id: "projects", label: "Projects", file: "projects.json", icon: Cube },
@@ -41,46 +41,76 @@ const sections = [
 const experience = [
   {
     index: "01",
-    role: "Cloud Engineer",
-    company: "Okestro",
+    role: "2024.06 — 2024.12 / 현장실습",
+    company: "씨드젠 · 개인정보 처리방침 평가제 업무 지원",
     description:
-      "OpenStack과 Ceph를 중심으로 프라이빗 클라우드 환경을 다루고, Kubernetes 기반 플랫폼과 운영 자동화 흐름을 설계합니다.",
-    tags: ["OpenStack", "Ceph", "Kubernetes"],
+      "개인정보보호위원회·KISA 협업 사업에서 국민생활 밀접 49개 기업의 처리방침을 검토했습니다. 26개 항목·42개 지표를 기준으로 기초자료와 평가 소견을 정리하며 보안 판단 기준과 문서화 방식을 익혔습니다.",
+    tags: ["Privacy", "Security Review", "Documentation"],
   },
   {
     index: "02",
-    role: "Current Focus",
-    company: "Cloud Platform Engineering",
+    role: "2025.12 — 2026.07 / 교육",
+    company: "메가존클라우드 IT Bootcamp · Solution Architect",
     description:
-      "반복 가능한 인프라, 명확한 운영 기준, 장애를 빠르게 읽을 수 있는 관찰 가능성을 하나의 엔지니어링 시스템으로 연결합니다.",
-    tags: ["Terraform", "Ansible", "Observability"],
+      "Linux·Network·DB 기초부터 Docker, Kubernetes, AWS, GCP까지 학습하고 온프레미스 및 클라우드 아키텍처 프로젝트를 수행했습니다. 구축 자체보다 가용성·확장성·보안·복구 가능성을 함께 검토하는 운영 관점을 쌓았습니다.",
+    tags: ["AWS", "Kubernetes", "Network", "GCP"],
+  },
+  {
+    index: "03",
+    role: "2018.03 — 2026.08 / 졸업 예정",
+    company: "가천대학교 · 유럽어문학과 / 소프트웨어 복수전공",
+    description:
+      "소프트웨어 복수전공과 클라우드 인프라 교육을 연결해 기술 기반을 확장했습니다. 리눅스마스터 2급을 취득했고 정보처리기사 필기 합격 후 실기와 AWS SAA를 준비하고 있습니다.",
+    tags: ["Software", "리눅스마스터 2급", "정보처리기사 필기"],
   },
 ];
 
 const projects = [
   {
-    id: "private-cloud",
-    spec: "SPEC: 001 / PLATFORM",
-    title: "Private Cloud Platform",
+    id: "securevoice",
+    spec: "PROJECT: 01 / 2026.05 — 2026.07",
+    title: "SecureVoiceGuard AWS 전환",
     description:
-      "컴퓨트·스토리지·오케스트레이션 계층을 함께 설계해 확장 가능한 프라이빗 클라우드 기반을 구성하는 프로젝트입니다.",
-    image: "/assets/projects/cache-architecture.png",
-    imageAlt: "서비스와 클러스터 계층이 연결된 프라이빗 클라우드 아키텍처 다이어그램",
+      "AI 음성 위변조 탐지 서비스의 단일 서버 구조를 AWS 관리형 서비스 기반으로 재설계한 5인 프로젝트입니다. DB 인프라 고도화와 운영 체계를 담당했습니다.",
+    image: "/assets/projects/securevoice-architecture.png",
+    imageAlt: "SecureVoiceGuard의 CloudFront, ECS Fargate, SQS, RDS 기반 AWS 아키텍처",
     fit: "contain",
-    tags: ["OpenStack", "Ceph", "Kubernetes"],
-    details: ["서비스 계층과 인프라 경계 정의", "고가용성 구성과 장애 도메인 검토", "운영자가 읽기 쉬운 구조 문서화"],
+    tags: ["AWS", "RDS MySQL", "RDS Proxy", "Terraform", "CloudWatch"],
+    metrics: [
+      { value: "1분 내", label: "Multi-AZ RTO" },
+      { value: "거의 0", label: "RPO" },
+      { value: "5명", label: "Team" },
+    ],
+    details: [
+      "사용자 트래픽과 요구사항을 기준으로 RDS 스펙과 확장 방향을 산정",
+      "RDS MySQL Multi-AZ, RDS Proxy, 자동 백업·PITR 기반 장애 대응 구조 설계",
+      "Secrets Manager·TLS·SSM으로 DB 계정과 관리자 접근 경로 보안 강화",
+      "CloudWatch 지표·Slack 알람·복구 Runbook으로 관측과 대응 절차 문서화",
+      "Terraform을 persistent/runtime 계층으로 분리하고 S3 state 기반 협업 구조 정리",
+    ],
   },
   {
-    id: "cloud-operations",
-    spec: "SPEC: 002 / OPERATIONS",
-    title: "Cloud Operations Console",
+    id: "onprem-ticketing",
+    spec: "PROJECT: 02 / 2026.03.01 — 2026.03.16",
+    title: "OnPremises-MZC 티켓팅 인프라",
     description:
-      "클라우드 상태를 한눈에 파악하고 반복 작업을 줄일 수 있도록 운영 지표와 자동화 흐름을 연결한 콘솔 프로젝트입니다.",
-    image: "/assets/projects/realtime-dashboard.png",
-    imageAlt: "처리량과 지연 시간, 시스템 상태를 보여주는 클라우드 운영 대시보드",
-    fit: "cover",
-    tags: ["Terraform", "Ansible", "Monitoring"],
-    details: ["핵심 운영 지표 우선순위 설계", "반복 프로비저닝 작업 자동화", "상태 변화와 실행 기록의 추적성 확보"],
+      "명절 예매 트래픽을 가정한 5인 Kubernetes 인프라 프로젝트입니다. 오토스케일링, 서비스 안정성, 설정 분리, 캐시와 영속 스토리지를 담당했습니다.",
+    image: "/assets/projects/onprem-hpa.png",
+    imageAlt: "JMeter 부하에 따라 Kubernetes Pod가 자동 확장되는 HPA 검증 결과",
+    fit: "contain",
+    tags: ["Kubernetes", "HPA", "Redis", "Longhorn", "JMeter"],
+    metrics: [
+      { value: "2 → 10", label: "Pods" },
+      { value: "210 → 8ms", label: "응답 시간" },
+      { value: "1,200 → 72", label: "MySQL QPS" },
+    ],
+    details: [
+      "Metrics Server와 HPA를 구성해 JMeter 부하 시 Pod 자동 확장·축소 흐름 검증",
+      "Liveness·Readiness Probe와 Rolling Update로 자가 치유와 무중단 배포 기반 구성",
+      "ConfigMap·Secret으로 일반 설정과 민감정보를 컨테이너 이미지에서 분리",
+      "Redis Cache-Aside 패턴으로 조회 부하와 응답 시간을 개선",
+      "Redis StatefulSet에 Longhorn PVC를 연결해 Pod 재생성 후 데이터 유지 검증",
+    ],
   },
 ];
 
@@ -177,7 +207,7 @@ function ProjectCard({ project }) {
       <figure className="project-figure">
         <figcaption>
           <span><ImageIcon aria-hidden="true" /> preview.png</span>
-          <span className="figure-format">16:10</span>
+          <span className="figure-format">16:9</span>
         </figcaption>
         <div className="project-image-wrap">
           <img
@@ -191,6 +221,14 @@ function ProjectCard({ project }) {
 
       <div className="project-body">
         <p>{project.description}</p>
+        <dl className="project-metrics" aria-label={`${project.title} 검증 수치`}>
+          {project.metrics.map((metric) => (
+            <div key={metric.label}>
+              <dt>{metric.value}</dt>
+              <dd>{metric.label}</dd>
+            </div>
+          ))}
+        </dl>
         <ul className="tag-list" aria-label={`${project.title} 기술 스택`}>
           {project.tags.map((tag) => <li key={tag}>{tag}</li>)}
         </ul>
@@ -201,7 +239,7 @@ function ProjectCard({ project }) {
           aria-controls={`${project.id}-details`}
           onClick={() => setExpanded((value) => !value)}
         >
-          {expanded ? "검토 포인트 닫기" : "검토 포인트 보기"}
+          {expanded ? "담당 내용 닫기" : "담당 내용 보기"}
           <ArrowRight className={expanded ? "is-rotated" : ""} weight="bold" aria-hidden="true" />
         </button>
         <div id={`${project.id}-details`} className="project-details" hidden={!expanded}>
@@ -362,7 +400,7 @@ export function App() {
           >
             {menuOpen ? <X aria-hidden="true" /> : <List aria-hidden="true" />}
           </button>
-          <span className="app-name"><BracketsCurly weight="bold" aria-hidden="true" /> DevConsole</span>
+          <span className="app-name"><BracketsCurly weight="bold" aria-hidden="true" /> PortfolioConsole</span>
         </div>
 
         <button
@@ -406,7 +444,7 @@ export function App() {
           <div className="folder-row">
             <CaretDown weight="bold" aria-hidden="true" />
             <FolderOpen weight="fill" aria-hidden="true" />
-            <span>JAEHWAN_PORTFOLIO</span>
+            <span>KIM_JAEHWAN</span>
           </div>
 
           <nav className="file-tree" aria-label="페이지 내 이동">
@@ -445,7 +483,7 @@ export function App() {
               <span className="tab-dot" aria-label="저장됨">●</span>
             </div>
             <div className="editor-breadcrumb">
-              JAEHWAN_PORTFOLIO <span>›</span> {activeMeta.label}
+              KIM_JAEHWAN <span>›</span> {activeMeta.label}
             </div>
           </div>
 
@@ -461,10 +499,11 @@ export function App() {
                     <TypewriterRole />
                   </h1>
                   <p className="hero-description">
-                    복잡한 인프라를 안정적으로 운영 가능한 플랫폼으로 바꿉니다.
+                    가용성·확장성·보안·복구 가능성을 함께 고민하고,
+                    검증 결과와 운영 기준을 문서로 남기는 클라우드 엔지니어를 지향합니다.
                   </p>
                   <ul className="tag-list hero-tags" aria-label="핵심 기술">
-                    <li>OpenStack</li><li>Ceph</li><li>Kubernetes</li><li>Terraform</li><li>Ansible</li>
+                    <li>AWS</li><li>Kubernetes</li><li>Terraform</li><li>Network</li><li>Monitoring</li>
                   </ul>
                   <div className="profile-links" aria-label="외부 프로필 링크">
                     <a
@@ -495,7 +534,7 @@ export function App() {
                   <div className="portrait-wrap">
                     <img src="/assets/profile-jaehwan.jpg" alt="김재환 프로필 사진" />
                   </div>
-                  <p><span>ROLE</span> Cloud &amp; Infrastructure Engineer</p>
+                  <p><span>FOCUS</span> Cloud &amp; Infrastructure</p>
                   <p><span>BASE</span> Seoul, South Korea</p>
                 </figure>
               </div>
@@ -505,8 +544,8 @@ export function App() {
               <LineRail start={27} count={26} />
               <div className="section-content">
                 <div className="section-heading">
-                  <div><p className="eyebrow">EXPERIENCE.LOG</p><h2 id="experience-title">운영을 이해하는 플랫폼 엔지니어링</h2></div>
-                  <span className="section-command">$ tail -f experience.log</span>
+                  <div><p className="eyebrow">JOURNEY.LOG</p><h2 id="experience-title">보안 검토에서 클라우드 운영까지</h2></div>
+                  <span className="section-command">$ tail -f journey.log</span>
                 </div>
                 <div className="timeline">
                   {experience.map((item) => (
@@ -531,7 +570,7 @@ export function App() {
               <div className="section-content">
                 <div className="section-heading">
                   <div><p className="eyebrow">PROJECTS.JSON</p><h2 id="projects-title">설계가 보이는 프로젝트</h2></div>
-                  <span className="section-command">2 objects loaded</span>
+                  <span className="section-command">2 verified projects</span>
                 </div>
                 <div className="project-grid">
                   {projects.map((project) => <ProjectCard key={project.id} project={project} />)}
@@ -545,16 +584,16 @@ export function App() {
                 <div>
                   <p className="terminal-prompt"><span>visitor@portfolio</span>:~$ open contact.txt</p>
                   <p className="eyebrow">CONTACT / NEXT STEP</p>
-                  <h2 id="contact-title">더 나은 클라우드 운영을 함께 이야기해요.</h2>
-                  <p>새로운 플랫폼, 인프라 자동화, 운영 경험에 대한 대화를 환영합니다.</p>
+                  <h2 id="contact-title">운영을 생각하는 클라우드 엔지니어를 찾고 계신가요?</h2>
+                  <p>AWS, Kubernetes, 인프라 안정성·자동화에 관한 기회와 대화를 기다립니다.</p>
                 </div>
                 <div className="contact-card">
-                  <p className="contact-status"><CheckCircle weight="fill" aria-hidden="true" /> Available for conversation</p>
+                  <p className="contact-status"><CheckCircle weight="fill" aria-hidden="true" /> Open to cloud infrastructure roles</p>
                   <dl>
                     <div><dt><MapPin aria-hidden="true" /> Location</dt><dd>Seoul, South Korea</dd></div>
-                    <div><dt><Command aria-hidden="true" /> Contact channel</dt><dd>Available on request</dd></div>
+                    <div><dt><Command aria-hidden="true" /> Contact</dt><dd>GitHub 또는 Blog</dd></div>
                   </dl>
-                  <p className="contact-note">실제 이메일이나 링크가 제공되면 이 영역에 바로 연결할 수 있습니다.</p>
+                  <p className="contact-note">전화번호·상세 주소·생년월일·이메일은 공개 페이지에서 제외했습니다. 직접 연락처 공개는 확인 후 추가할 수 있습니다.</p>
                   <a className="top-button" href="#profile" onClick={(event) => navigateTo(event, "profile")}>
                     <ArrowUp weight="bold" aria-hidden="true" /> 프로필로 돌아가기
                   </a>
@@ -571,7 +610,7 @@ export function App() {
       </div>
 
       <footer className="statusbar">
-        <span><GitBranch weight="bold" aria-hidden="true" /> main*</span>
+        <span><GitBranch weight="bold" aria-hidden="true" /> codex/personalize-profile</span>
         <span><CheckCircle weight="fill" aria-hidden="true" /> 0 errors</span>
         <span className="statusbar-spacer" />
         <span>{activeMeta.file}</span>
