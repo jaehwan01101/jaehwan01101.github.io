@@ -9,7 +9,6 @@ import {
   Circle,
   ClockCounterClockwise,
   Cloud,
-  Command,
   Cube,
   FileText,
   FolderOpen,
@@ -581,8 +580,9 @@ export function App() {
                   <div className="portrait-wrap">
                     <img src="/assets/profile-jaehwan.jpg" alt="김재환 프로필 사진" />
                   </div>
-                  <p><span>FOCUS</span> Cloud &amp; Infrastructure</p>
-                  <p><span>BASE</span> Seoul, South Korea</p>
+                  <p><span>분야</span> 클라우드 &amp; 인프라</p>
+                  <p><span>주소</span> 서울시 송파구 오금동</p>
+                  <p><span>이메일</span> <a href="mailto:o980204@naver.com">o980204@naver.com</a></p>
                 </figure>
 
               </div>
@@ -638,10 +638,10 @@ export function App() {
                 <div className="contact-card">
                   <p className="contact-status"><CheckCircle weight="fill" aria-hidden="true" /> Open to cloud infrastructure roles</p>
                   <dl>
-                    <div><dt><MapPin aria-hidden="true" /> Location</dt><dd>Seoul, South Korea</dd></div>
-                    <div><dt><Command aria-hidden="true" /> Contact</dt><dd>GitHub 또는 Blog</dd></div>
+                    <div><dt><MapPin aria-hidden="true" /> 주소</dt><dd>서울시 송파구 오금동</dd></div>
+                    <div><dt><At aria-hidden="true" /> 이메일</dt><dd><a href="mailto:o980204@naver.com">o980204@naver.com</a></dd></div>
                   </dl>
-                  <p className="contact-note">전화번호·상세 주소·생년월일·이메일은 공개 페이지에서 제외했습니다. 직접 연락처 공개는 확인 후 추가할 수 있습니다.</p>
+                  <p className="contact-note">프로젝트 코드와 학습 기록은 GitHub와 Blog에서 확인하실 수 있습니다.</p>
                   <a className="top-button" href="#profile" onClick={(event) => navigateTo(event, "profile")}>
                     <ArrowUp weight="bold" aria-hidden="true" /> 프로필로 돌아가기
                   </a>

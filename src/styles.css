@@ -362,6 +362,8 @@ kbd {
 .portrait-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; filter: none; }
 .profile-file > p { display: grid; grid-template-columns: 68px minmax(0, 1fr); margin: 0; border-top: 1px solid var(--line-soft); padding: 7px 11px; color: #555c67; font-family: var(--font-mono); font-size: 9px; }
 .profile-file > p span { color: var(--primary); font-weight: 800; }
+.profile-file > p a { overflow: hidden; color: inherit; text-decoration: underline; text-decoration-color: #a8b6c8; text-underline-offset: 2px; text-overflow: ellipsis; white-space: nowrap; }
+.profile-file > p a:hover { color: var(--primary); text-decoration-color: currentColor; }
 
 .project-figure figcaption { display: flex; height: 36px; align-items: center; gap: 7px; border-bottom: 1px solid var(--line); background: #f7f8fa; padding: 0 12px; color: #5d6470; font-family: var(--font-mono); font-size: 9px; }
 .project-figure figcaption svg { width: 13px; height: 13px; color: var(--primary); }
@@ -432,6 +434,8 @@ kbd {
 .contact-card dt { display: flex; align-items: center; gap: 7px; color: #757c87; font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; }
 .contact-card dt svg { width: 14px; height: 14px; color: var(--primary); }
 .contact-card dd { margin: 0; color: #3f4650; font-size: 12px; font-weight: 700; }
+.contact-card dd a { color: var(--primary); text-decoration: underline; text-decoration-color: #a8b6c8; text-underline-offset: 2px; }
+.contact-card dd a:hover { text-decoration-color: currentColor; }
 .contact-note { margin: 16px 0 19px; border-left: 2px solid var(--primary); background: var(--surface-blue); padding: 10px 12px; color: #626a76; font-size: 11px; }
 .top-button { min-height: 40px; justify-content: center; border: 1px solid #aebdce; border-radius: 5px; background: #f6f9fd; padding: 8px 13px; }
 
