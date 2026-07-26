@@ -66,7 +66,7 @@ const experience = [
 const projects = [
   {
     id: "securevoice",
-    spec: "PROJECT: 01 / 2026.05 — 2026.07",
+    spec: "PROJECT: 01 / TEAM PROJECT / 2026.05 — 2026.07",
     title: "SecureVoiceGuard AWS 전환",
     description:
       "AI 음성 위변조 탐지 서비스의 단일 서버 구조를 트래픽 증가, AI 추론 부하, 장애 복구와 반복 배포에 대응할 수 있는 AWS 관리형 아키텍처로 전환한 5인 프로젝트입니다.",
@@ -96,7 +96,7 @@ const projects = [
   },
   {
     id: "onprem-ticketing",
-    spec: "PROJECT: 02 / 2026.03.01 — 2026.03.16",
+    spec: "PROJECT: 02 / TEAM PROJECT / 2026.03.01 — 2026.03.16",
     title: "OnPremises-MZC 티켓팅 인프라",
     description:
       "명절 예매 시점의 트래픽 폭증, 단일 장비 장애, 데이터 유실과 수동 장애 대응 문제를 해결하기 위해 네트워크부터 애플리케이션·데이터·관측 계층까지 통합 설계한 5인 프로젝트입니다.",
@@ -617,7 +617,7 @@ export function App() {
               <LineRail start={53} count={34} />
               <div className="section-content">
                 <div className="section-heading">
-                  <div><p className="eyebrow">PROJECTS.JSON</p><h2 id="projects-title">설계가 보이는 프로젝트</h2></div>
+                  <div><p className="eyebrow">PROJECTS.JSON</p><h2 id="projects-title">요구사항을 구현한 프로젝트</h2></div>
                   <span className="section-command">2 verified projects</span>
                 </div>
                 <div className="project-grid">
