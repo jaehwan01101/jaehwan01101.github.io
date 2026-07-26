@@ -27,6 +27,12 @@ import {
 const sections = [
   { id: "profile", label: "Profile", file: "profile.md", icon: User },
   {
+    id: "certifications",
+    label: "Certificates",
+    file: "certifications.md",
+    icon: FileText,
+  },
+  {
     id: "experience",
     label: "Growth",
     file: "growth.log",
@@ -34,6 +40,24 @@ const sections = [
   },
   { id: "projects", label: "Projects", file: "projects.json", icon: Cube },
   { id: "contact", label: "Contact", file: "contact.txt", icon: At },
+];
+
+const certifications = [
+  {
+    name: "리눅스마스터 2급",
+    status: "취득",
+    complete: true,
+  },
+  {
+    name: "정보처리기사",
+    status: "필기 합격 → 실기 준비 중",
+    complete: false,
+  },
+  {
+    name: "AWS Solutions Architect – Associate",
+    status: "SAA-C03 준비 중",
+    complete: false,
+  },
 ];
 
 const experience = [
@@ -612,8 +636,33 @@ export function App() {
               </div>
             </section>
 
+            <section id="certifications" className="editor-section certifications-section" aria-labelledby="certifications-title">
+              <LineRail start={27} count={18} />
+              <div className="section-content">
+                <div className="section-heading">
+                  <div><p className="eyebrow">CERTIFICATIONS.MD</p><h2 id="certifications-title">자격 및 준비 현황</h2></div>
+                  <span className="section-command">3 credentials</span>
+                </div>
+                <div className="certification-grid">
+                  {certifications.map((certification) => (
+                    <article className="certification-card" key={certification.name}>
+                      <span className={`certification-icon ${certification.complete ? "is-complete" : "is-progress"}`} aria-hidden="true">
+                        {certification.complete
+                          ? <CheckCircle weight="fill" />
+                          : <ClockCounterClockwise weight="bold" />}
+                      </span>
+                      <div>
+                        <h3>{certification.name}</h3>
+                        <p>{certification.status}</p>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            </section>
+
             <section id="experience" className="editor-section experience-section" aria-labelledby="experience-title">
-              <LineRail start={27} count={26} />
+              <LineRail start={45} count={26} />
               <div className="section-content">
                 <div className="section-heading">
                   <div><p className="eyebrow">GROWTH.LOG</p><h2 id="experience-title">성장 과정</h2></div>
@@ -645,7 +694,7 @@ export function App() {
             </section>
 
             <section id="projects" className="editor-section projects-section" aria-labelledby="projects-title">
-              <LineRail start={53} count={34} />
+              <LineRail start={71} count={34} />
               <div className="section-content">
                 <div className="section-heading">
                   <div><p className="eyebrow">PROJECTS.JSON</p><h2 id="projects-title">요구사항을 구현한 프로젝트</h2></div>
@@ -658,7 +707,7 @@ export function App() {
             </section>
 
             <section id="contact" className="editor-section contact-section" aria-labelledby="contact-title">
-              <LineRail start={87} count={22} />
+              <LineRail start={105} count={22} />
               <div className="section-content contact-grid">
                 <div>
                   <p className="terminal-prompt"><span>visitor@portfolio</span>:~$ open contact.txt</p>
