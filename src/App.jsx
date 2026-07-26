@@ -50,15 +50,34 @@ const experience = [
     role: "2025.12 — 2026.07 / 교육",
     company: "메가존클라우드 IT Bootcamp · Solution Architect",
     description:
-      "Linux·Network·DB 기초부터 Docker, Kubernetes, AWS, GCP까지 학습하고 온프레미스 및 클라우드 아키텍처 프로젝트를 수행했습니다. 구축 자체보다 가용성·확장성·보안·복구 가능성을 함께 검토하는 운영 관점을 쌓았습니다.",
-    tags: ["AWS", "Kubernetes", "Network", "GCP"],
+      "Linux·네트워크·데이터베이스 기초부터 온프레미스, 컨테이너, AWS·GCP 클라우드, IaC, CI/CD·GitOps, 모니터링과 자동화까지 Solution Architect 커리큘럼을 이수했습니다. 각 기술을 개별적으로 학습하는 데 그치지 않고 팀 프로젝트에서 가용성·확장성·보안·복구와 운영 가능성을 함께 검토하며 아키텍처를 설계하고 검증했습니다.",
+    curriculum: [
+      "Linux 서버 기초 및 운영",
+      "네트워크 기초와 GNS3·Cisco Packet Tracer 실습",
+      "서브넷팅·라우팅·스위칭·VLAN·NAT·ACL",
+      "데이터베이스·SQL·Redis 기초",
+      "가상화와 온프레미스 인프라 설계",
+      "Docker·Kubernetes 컨테이너 환경",
+      "AWS 클라우드 아키텍처 설계·구축",
+      "Terraform 기반 IaC",
+      "Jenkins·GitHub Actions·Argo CD 기반 CI/CD·GitOps",
+      "CloudWatch·Prometheus·Grafana 모니터링",
+      "GCP·GKE 및 멀티클라우드 구성",
+      "Python·boto3 기반 클라우드 자동화와 Bedrock 기초 실습",
+    ],
+    tags: [
+      "Linux", "GNS3", "Cisco Packet Tracer", "MySQL", "Redis", "Docker",
+      "Kubernetes", "AWS", "Terraform", "Jenkins", "GitHub Actions", "Argo CD",
+      "CloudWatch", "Prometheus", "Grafana", "GCP", "GKE", "Python", "boto3",
+      "Amazon Bedrock",
+    ],
   },
   {
     index: "03",
     role: "2018.03 — 2026.08 / 졸업 예정",
     company: "가천대학교 · 유럽어문학과 / 소프트웨어 복수전공",
     description: [
-      "독일문학과 유럽의 문화·정치·제도를 공부하며 자료의 맥락과 근거를 구조화하고, 팀 프로젝트와 발표를 통해 의견을 조율하는 방법을 배웠습니다.",
+      "본전공인 유럽어문학과에서 독문학과 유럽의 문화·정치·제도를 공부하며 자료의 맥락과 근거를 구조화하고, 팀 프로젝트와 발표를 통해 의견을 조율하는 방법을 배웠습니다.",
       "소프트웨어 복수전공에서는 C·Java·Python, 자료구조와 웹 프로그래밍의 기초를 익혔으며, 이를 바탕으로 클라우드·인프라 역량을 확장하고 있습니다.",
     ],
     tags: ["C", "Python", "Java", "JavaScript", "HTML", "자료구조", "로봇공학"],
@@ -607,6 +626,11 @@ export function App() {
                         {(Array.isArray(item.description) ? item.description : [item.description]).map((paragraph) => (
                           <p key={paragraph}>{paragraph}</p>
                         ))}
+                        {item.curriculum && (
+                          <ul className="experience-curriculum" aria-label={`${item.company} 주요 커리큘럼`}>
+                            {item.curriculum.map((subject) => <li key={subject}>{subject}</li>)}
+                          </ul>
+                        )}
                         <ul className="tag-list" aria-label={`${item.company} 관련 기술`}>
                           {item.tags.map((tag) => <li key={tag}>{tag}</li>)}
                         </ul>
