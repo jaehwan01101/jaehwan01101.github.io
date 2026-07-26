@@ -45,18 +45,15 @@ const sections = [
 const certifications = [
   {
     name: "리눅스마스터 2급",
-    status: "취득",
-    complete: true,
+    status: "한국정보통신진흥협회(KAIT) | 2026.04.03",
   },
   {
     name: "정보처리기사",
     status: "필기 합격 → 실기 준비 중",
-    complete: false,
   },
   {
     name: "AWS Solutions Architect – Associate",
     status: "SAA-C03 준비 중",
-    complete: false,
   },
 ];
 
@@ -646,11 +643,6 @@ export function App() {
                 <div className="certification-grid">
                   {certifications.map((certification) => (
                     <article className="certification-card" key={certification.name}>
-                      <span className={`certification-icon ${certification.complete ? "is-complete" : "is-progress"}`} aria-hidden="true">
-                        {certification.complete
-                          ? <CheckCircle weight="fill" />
-                          : <ClockCounterClockwise weight="bold" />}
-                      </span>
                       <div>
                         <h3>{certification.name}</h3>
                         <p>{certification.status}</p>
