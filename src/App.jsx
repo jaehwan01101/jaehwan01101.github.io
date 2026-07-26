@@ -523,7 +523,7 @@ export function App() {
                     <TypewriterRole />
                   </h1>
                   <p className="hero-description">
-                    가용성·확장성·보안·복구 가능성을 함께 고민하고,
+                    보안·복구·지속 가능성을 함께 고민하고,
                     검증 결과와 운영 기준을 문서로 남기는 클라우드 엔지니어를 지향합니다.
                   </p>
                   <ul className="tag-list hero-tags" aria-label="기술 역량">
