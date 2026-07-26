@@ -57,9 +57,12 @@ const experience = [
     index: "03",
     role: "2018.03 — 2026.08 / 졸업 예정",
     company: "가천대학교 · 유럽어문학과 / 소프트웨어 복수전공",
-    description:
-      "소프트웨어 복수전공과 클라우드 인프라 교육을 연결해 기술 기반을 확장했습니다. 리눅스마스터 2급을 취득했고 정보처리기사 필기 합격 후 실기와 AWS SAA를 준비하고 있습니다.",
-    tags: ["Software", "리눅스마스터 2급", "정보처리기사 필기"],
+    description: [
+      "독일어문학과 유럽의 문화·정치·제도를 공부하며 하나의 현상을 배경과 관계, 제도적 맥락에서 해석하는 관점을 길렀습니다. 팀 프로젝트와 발표를 통해 다양한 의견을 조율하고 결과를 전달하는 소통·협업 역량도 쌓았습니다.",
+      "소프트웨어 복수전공에서는 C 기반 프로그래밍 기초·자료구조·로봇공학, Python 프로그래밍, Java 기반 객체지향·모바일 프로그래밍, JavaScript·HTML 기반 웹 프로그래밍을 학습했습니다.",
+      "이후 소프트웨어와 클라우드 인프라를 학습하며 이러한 관점을 요구사항 분석, 기술 대안 비교, 공식 문서 검토, 운영 결과 문서화와 팀원 간 협업에 활용하고 있습니다.",
+    ],
+    tags: ["C", "Python", "Java", "JavaScript", "HTML", "자료구조", "로봇공학"],
   },
 ];
 
@@ -602,7 +605,9 @@ export function App() {
                       <div className="timeline-copy">
                         <p className="timeline-role">{item.role}</p>
                         <h3>{item.company}</h3>
-                        <p>{item.description}</p>
+                        {(Array.isArray(item.description) ? item.description : [item.description]).map((paragraph) => (
+                          <p key={paragraph}>{paragraph}</p>
+                        ))}
                         <ul className="tag-list" aria-label={`${item.company} 관련 기술`}>
                           {item.tags.map((tag) => <li key={tag}>{tag}</li>)}
                         </ul>
