@@ -43,7 +43,6 @@ const experience = [
     company: "씨드젠 · 개인정보 처리방침 평가제 업무 지원",
     description:
       "개인정보보호위원회·KISA 협업 사업에서 국민생활 밀접 49개 기업의 처리방침을 검토했습니다. 26개 항목·42개 지표를 기준으로 기초자료와 평가 소견을 정리하며 보안 판단 기준과 문서화 방식을 익혔습니다.",
-    tags: ["Privacy", "Security Review", "Documentation"],
   },
   {
     index: "02",
@@ -51,7 +50,6 @@ const experience = [
     company: "메가존클라우드 IT Bootcamp · Solution Architect",
     description:
       "Linux·Network·DB 기초부터 Docker, Kubernetes, AWS, GCP까지 학습하고 온프레미스 및 클라우드 아키텍처 프로젝트를 수행했습니다. 구축 자체보다 가용성·확장성·보안·복구 가능성을 함께 검토하는 운영 관점을 쌓았습니다.",
-    tags: ["AWS", "Kubernetes", "Network", "GCP"],
   },
   {
     index: "03",
@@ -62,7 +60,6 @@ const experience = [
       "소프트웨어 복수전공에서는 C 기반 프로그래밍 기초·자료구조·로봇공학, Python 프로그래밍, Java 기반 객체지향·모바일 프로그래밍, JavaScript·HTML 기반 웹 프로그래밍을 학습했습니다.",
       "이후 소프트웨어와 클라우드 인프라를 학습하며 이러한 관점을 요구사항 분석, 기술 대안 비교, 공식 문서 검토, 운영 결과 문서화와 팀원 간 협업에 활용하고 있습니다.",
     ],
-    tags: ["C", "Python", "Java", "JavaScript", "HTML", "자료구조", "로봇공학"],
   },
 ];
 
@@ -608,9 +605,6 @@ export function App() {
                         {(Array.isArray(item.description) ? item.description : [item.description]).map((paragraph) => (
                           <p key={paragraph}>{paragraph}</p>
                         ))}
-                        <ul className="tag-list" aria-label={`${item.company} 관련 기술`}>
-                          {item.tags.map((tag) => <li key={tag}>{tag}</li>)}
-                        </ul>
                       </div>
                     </article>
                   ))}
