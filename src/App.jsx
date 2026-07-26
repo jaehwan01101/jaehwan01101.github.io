@@ -703,9 +703,23 @@ export function App() {
               <div className="section-content contact-grid">
                 <div>
                   <p className="terminal-prompt"><span>visitor@portfolio</span>:~$ open contact.txt</p>
-                  <p className="eyebrow">CONTACT / NEXT STEP</p>
-                  <h2 id="contact-title">운영을 생각하는 클라우드 엔지니어를 찾고 계신가요?</h2>
-                  <p>AWS, Kubernetes, 인프라 안정성·자동화에 관한 기회와 대화를 기다립니다.</p>
+                  <p className="eyebrow">STRENGTHS / CONTACT</p>
+                  <h2 id="contact-title">저는 이러한 강점을 가진 엔지니어입니다.</h2>
+                  <p className="strengths-intro">기술을 깊이 이해하고, 사람들과 함께 더 나은 결과를 만들며, 고객에게 전달되는 가치를 먼저 생각합니다.</p>
+                  <ul className="strength-list" aria-label="김재환의 강점">
+                    <li>
+                      <strong>학습 의지</strong>
+                      <span>기술을 사용하는 데 그치지 않고 작동 원리와 세부 구조를 계속 파고들어 이해합니다. 관련 도서를 꾸준히 읽으며 배운 지식을 더 깊고 넓게 확장합니다.</span>
+                    </li>
+                    <li>
+                      <strong>협업 능력</strong>
+                      <span>편안하게 의견을 나눌 수 있는 분위기를 만들고, 서로 다른 관점을 경청해 팀이 실행할 수 있는 합의점으로 조율합니다.</span>
+                    </li>
+                    <li>
+                      <strong>고객 우선</strong>
+                      <span>기술적 선택이 최종 사용자에게 미치는 영향과 경험을 먼저 살피고, 고객에게 더 안정적이고 편리한 결과를 만드는 방향으로 결정합니다.</span>
+                    </li>
+                  </ul>
                 </div>
                 <div className="contact-card">
                   <p className="contact-status"><CheckCircle weight="fill" aria-hidden="true" /> Open to cloud infrastructure roles</p>
