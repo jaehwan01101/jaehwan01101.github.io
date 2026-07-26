@@ -402,9 +402,9 @@ kbd {
 .project-figure { width: min(68%, 1050px); margin: 0 auto; overflow: hidden; border: 1px solid #d1d9e3; border-radius: 4px; background: var(--surface-blue); }
 .project-figure figcaption span { display: inline-flex; align-items: center; gap: 6px; }
 .project-figure figcaption .figure-format { margin-left: auto; color: #969ba4; }
-.project-image-wrap { aspect-ratio: 16 / 9; min-height: 360px; max-height: 660px; overflow: hidden; background: #eaf1f9; }
-.project-image { width: 100%; height: 100%; }
-.project-image-contain { object-fit: contain; padding: 6px; }
+.project-image-wrap { overflow: hidden; background: #eaf1f9; padding: 6px; }
+.project-image { display: block; width: 100%; height: auto; }
+.project-image-contain { object-fit: contain; }
 .project-image-cover { object-fit: cover; object-position: center; filter: saturate(.78) contrast(1.05); }
 .project-body { padding: 24px; }
 .project-summary { margin-bottom: 20px; }
@@ -501,7 +501,6 @@ kbd {
   .project-preview > p { font-size: 13px; }
   .project-expanded-content { padding-top: 15px; }
   .project-figure { width: auto; margin: 0 15px; }
-  .project-image-wrap { min-height: 0; max-height: none; }
   .project-body { padding: 15px; }
   .project-overview li { font-size: 12px; }
   .contact-grid { gap: 30px; }

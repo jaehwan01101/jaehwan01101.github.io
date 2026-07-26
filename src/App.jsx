@@ -242,7 +242,7 @@ function ProjectCard({ project }) {
         <figure className="project-figure">
           <figcaption>
             <span><ImageIcon aria-hidden="true" /> {project.imageLabel}</span>
-            <span className="figure-format">16:9</span>
+            <span className="figure-format">AUTO FIT</span>
           </figcaption>
           <div className="project-image-wrap">
             <img
