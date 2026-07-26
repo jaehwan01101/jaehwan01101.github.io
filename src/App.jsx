@@ -256,17 +256,17 @@ function ProjectCard({ project }) {
 
         <div className="project-body">
           <div className="project-summary">
-            <p className="project-summary-label">REQUIREMENTS / ARCHITECTURE</p>
+            <p className="project-summary-label">요구사항 및 아키텍처 설계</p>
             <ul className="project-overview">
               {project.overview.map((item) => <li key={item}>{item}</li>)}
             </ul>
           </div>
-          <p className="project-stack-label">TECH STACK</p>
+          <p className="project-stack-label">기술 스택</p>
           <ul className="tag-list" aria-label={`${project.title} 전체 기술 스택`}>
             {project.tags.map((tag) => <li key={tag}>{tag}</li>)}
           </ul>
           <div className="project-details">
-            <p className="project-summary-label">MY CONTRIBUTION</p>
+            <p className="project-summary-label">담당 내용</p>
             <ul>
               {project.details.map((detail) => (
                 <li key={detail}><CheckCircle weight="fill" aria-hidden="true" />{detail}</li>
