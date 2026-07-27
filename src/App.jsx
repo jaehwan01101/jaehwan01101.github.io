@@ -572,7 +572,8 @@ export function App() {
                   </h1>
                   <p className="hero-description">
                     아키텍처 수준에서 <strong>트레이드오프를 판단</strong>하고 <strong>끊임없이 배우는 자세</strong>로 인프라를 마주합니다.
-                    가용성·확장성·보안·복구·지속 가능성을 종합적으로 고려해 최적의 해답을 찾고,
+                    가용성·확장성·보안·복구·지속 가능성을 종합적으로 고려해 최적의 해답을 찾고
+                    <br />
                     <strong>'무엇을 왜 이렇게 설계했는지' 설명하고 책임</strong>지며 운영 프로세스를 문서화하는 엔지니어를 지향합니다.
                   </p>
                   <ul className="tag-list hero-tags" aria-label="기술 역량">
