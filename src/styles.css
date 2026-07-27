@@ -328,6 +328,7 @@ kbd {
 }
 @keyframes typing-cursor { 50% { opacity: 0; } }
 .hero-description { max-width: 690px; margin-bottom: 21px; color: #4f5662; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.72; }
+.hero-description strong { font-weight: 800; }
 .tag-list { display: flex; flex-wrap: wrap; gap: 7px; margin: 0; padding: 0; list-style: none; }
 .tag-list li { border: 1px solid #cfd7e2; border-radius: 4px; background: rgba(255, 255, 255, .68); padding: 4px 8px; color: #58606c; font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: .04em; }
 .hero-tags { margin-bottom: 26px; }
