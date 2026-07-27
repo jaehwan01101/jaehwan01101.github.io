@@ -118,11 +118,108 @@ const projects = [
     title: "SecureVoiceGuard AWS 전환",
     description:
       "AI 음성 위변조 탐지 서비스의 단일 서버 구조를 트래픽 증가, AI 추론 부하, 장애 복구와 반복 배포에 대응할 수 있는 AWS 관리형 아키텍처로 전환한 5인 프로젝트입니다.",
-    overview: [
-      "CloudFront와 AWS WAF를 외부 진입점으로 두고, ALB를 거쳐 Private Subnet의 ECS Fargate API·AI Worker로 연결되는 3-Tier 요청 경로를 설계했습니다.",
-      "정적 콘텐츠·음성 파일·AI 모델은 S3에 저장하고, Free/Paid SQS와 DLQ로 작업을 분리해 ECS Fargate AI Worker가 모델을 불러와 비동기 추론하도록 구성했습니다.",
-      "RDS MySQL Multi-AZ와 RDS Proxy로 데이터 계층을 분리하고, Jenkins·GitHub·ECR·ECS 배포 파이프라인으로 API와 Worker의 컨테이너 배포를 자동화했습니다.",
-      "CloudWatch·Prometheus·Grafana 모니터링, Terraform IaC, IAM·KMS·Secrets Manager·SSM을 함께 적용해 관측성·복구성·보안 요구사항을 운영 구조에 포함했습니다.",
+    caseStudy: [
+      {
+        number: "01",
+        title: "Overview",
+        subtitle: "프로젝트 배경",
+        intro:
+          "AI 음성 위변조 탐지 서비스를 운영하는 보안 스타트업을 가정하여, 금융·보험·공공기관 고객 확대와 분석 요청 증가에 대응하는 AWS 전환 프로젝트를 수행했습니다. 기존 온프레미스 단일 서버 구조를 클라우드 기반으로 분리하고, 확장성·가용성·보안·배포 및 모니터링을 고려한 운영 환경 구축을 목표로 했습니다.",
+      },
+      {
+        number: "02",
+        title: "Challenge",
+        subtitle: "문제 정의",
+        items: [
+          "Web·API·AI Inference·로컬 파일 저장 기능이 하나의 서버에 함께 배치되어 컴퓨팅 자원을 공유했습니다.",
+          "API가 AI 추론 완료까지 기다리는 동기식 처리 방식으로, 요청 급증 시 분석 지연과 Timeout이 발생했습니다.",
+          "기능별 독립 확장과 장애 격리가 어려워 단일 서버 장애가 전체 서비스 중단으로 이어질 수 있었습니다.",
+          "민감 음성 파일을 로컬 디스크에 저장해 암호화·접근통제·보관·삭제 정책을 체계적으로 적용하기 어려웠습니다.",
+          "서버 직접 접속을 통한 수동 배포와 상태 확인으로 변경 이력 관리와 신속한 장애 대응에 한계가 있었습니다.",
+        ],
+      },
+      {
+        number: "03",
+        title: "Solution",
+        subtitle: "해결 방안",
+        intro:
+          "단일 서버에 결합된 기능을 역할별 AWS 관리형 서비스로 분리하고, 비동기 AI 처리·데이터 보호·배포 및 모니터링 체계를 중심으로 운영 구조를 재설계했습니다.",
+        groups: [
+          {
+            title: "클라우드 아키텍처 분리",
+            items: [
+              "CloudFront·WAF·ALB를 외부 요청 진입점으로 구성했습니다.",
+              "ECS Fargate 기반 API Service와 AI Worker를 Private Subnet에 분리 배치했습니다.",
+              "Public·Private App·Private Data Subnet을 2개 가용영역으로 구성해 계층별 접근 범위를 구분했습니다.",
+            ],
+          },
+          {
+            title: "비동기 AI 처리 구조",
+            items: [
+              "음성 파일과 AI 모델을 S3에 저장하고 API와 AI 추론 작업을 분리했습니다.",
+              "Free·Paid SQS와 Worker를 각각 구성해 요금제별 작업 경로를 분리했습니다.",
+              "실패한 작업은 DLQ에 격리하고, request_id를 기준으로 처리 상태를 확인하도록 설계했습니다.",
+            ],
+          },
+          {
+            title: "데이터 가용성과 보안 강화",
+            items: [
+              "RDS MySQL Multi-AZ·RDS Proxy·자동 백업·PITR을 적용했습니다.",
+              "IAM과 Security Group으로 서비스별 접근 권한과 네트워크 경로를 제한했습니다.",
+              "KMS·Secrets Manager·TLS·SSM을 활용해 데이터 암호화, 인증정보와 관리자 접근을 분리했습니다.",
+            ],
+          },
+          {
+            title: "배포·운영 자동화",
+            items: [
+              "Jenkins·GitHub·ECR·ECS를 연결해 컨테이너 빌드와 배포 파이프라인을 구성했습니다.",
+              "Terraform과 S3 Remote State를 활용해 인프라 구성과 변경사항을 코드로 관리했습니다.",
+              "CloudWatch·Prometheus·Grafana와 Slack 알림으로 로그·지표·장애 징후를 확인하도록 구성했습니다.",
+            ],
+          },
+        ],
+      },
+      {
+        number: "04",
+        title: "Result",
+        subtitle: "성과",
+        intro:
+          "AWS 관리형 서비스를 활용해 단일 서버에 결합됐던 기능을 분리하고, 확장·장애 대응·데이터 보호·배포 및 모니터링이 가능한 운영 기반을 구축했습니다.",
+        groups: [
+          {
+            title: "서비스 확장성과 장애 대응",
+            items: [
+              "API와 AI Worker를 분리해 추론 작업이 API 요청 처리에 직접 영향을 주지 않는 구조를 마련했습니다.",
+              "SQS를 통해 요청 급증 시 작업을 대기열에 보관하고, Worker를 독립적으로 확장할 수 있도록 구성했습니다.",
+              "실패한 작업을 DLQ에 격리해 오류 원인 확인과 재처리가 가능한 흐름을 확보했습니다.",
+            ],
+          },
+          {
+            title: "데이터 가용성과 복구성",
+            items: [
+              "RDS Multi-AZ를 적용해 단일 DB 장애 시 Standby 인스턴스로 전환할 수 있는 구조를 구축했습니다.",
+              "자동 백업과 PITR을 적용하고, 특정 시점 복구를 위한 점검 절차와 Runbook을 작성했습니다.",
+              "RDS Proxy로 연결 집중 부담과 DB 장애 이후 애플리케이션의 재연결 영향을 완화했습니다.",
+            ],
+          },
+          {
+            title: "배포·모니터링·보안 운영",
+            items: [
+              "컨테이너 이미지 빌드부터 ECR 저장·ECS 배포까지 동일한 절차로 실행할 수 있도록 표준화했습니다.",
+              "CloudWatch·Prometheus·Grafana와 Slack 알림을 통해 로그와 지표, 장애 징후를 확인할 수 있도록 했습니다.",
+              "인증정보를 Secrets Manager로 분리하고, TLS·KMS·IAM·SSM을 적용해 데이터와 관리자 접근을 보호했습니다.",
+            ],
+          },
+          {
+            title: "비용 및 운영 효율 개선",
+            items: [
+              "ECS Task가 S3의 AI 모델을 NAT Gateway를 통해 다운로드하면서 하루 만에 400달러 이상의 예상 비용이 발생한 원인을 네트워크 경로에서 확인했습니다.",
+              "S3 Gateway Endpoint를 적용해 S3 트래픽이 NAT Gateway를 거치지 않도록 변경하고, 불필요한 데이터 처리 비용 발생 경로를 제거했습니다.",
+              "Terraform과 Remote State를 통해 팀원이 동일한 인프라 상태를 공유하고 변경사항을 추적할 수 있도록 했습니다.",
+            ],
+          },
+        ],
+      },
     ],
     image: "/assets/projects/securevoice-architecture.png",
     imageLabel: "aws-overall-architecture.png",
@@ -303,10 +400,46 @@ function ProjectCard({ project }) {
 
         <div className="project-body">
           <div className="project-summary">
-            <p className="project-summary-label">요구사항 및 아키텍처 설계</p>
-            <ul className="project-overview">
-              {project.overview.map((item) => <li key={item}>{item}</li>)}
-            </ul>
+            {project.caseStudy ? (
+              <div className="project-case-study">
+                {project.caseStudy.map((section) => (
+                  <section className="case-study-section" key={section.number} aria-labelledby={`${project.id}-${section.title}`}>
+                    <div className="case-study-heading">
+                      <span className="case-study-number" aria-hidden="true">{section.number}</span>
+                      <div>
+                        <p>{section.title}</p>
+                        <h4 id={`${project.id}-${section.title}`}>{section.subtitle}</h4>
+                      </div>
+                    </div>
+                    {section.intro && <p className="case-study-intro">{section.intro}</p>}
+                    {section.items && (
+                      <ul className="case-study-list">
+                        {section.items.map((item) => <li key={item}>{item}</li>)}
+                      </ul>
+                    )}
+                    {section.groups && (
+                      <div className="case-study-groups">
+                        {section.groups.map((group) => (
+                          <section className="case-study-group" key={group.title}>
+                            <h5>{group.title}</h5>
+                            <ul className="case-study-list">
+                              {group.items.map((item) => <li key={item}>{item}</li>)}
+                            </ul>
+                          </section>
+                        ))}
+                      </div>
+                    )}
+                  </section>
+                ))}
+              </div>
+            ) : (
+              <>
+                <p className="project-summary-label">요구사항 및 아키텍처 설계</p>
+                <ul className="project-overview">
+                  {project.overview.map((item) => <li key={item}>{item}</li>)}
+                </ul>
+              </>
+            )}
           </div>
           <p className="project-stack-label">기술 스택</p>
           <ul className="tag-list" aria-label={`${project.title} 전체 기술 스택`}>
