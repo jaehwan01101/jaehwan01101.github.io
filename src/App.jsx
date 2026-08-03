@@ -770,6 +770,16 @@ export function App() {
                       <Article weight="bold" aria-hidden="true" />
                       <span>Blog</span>
                     </a>
+                    <a
+                      className="profile-link"
+                      href="https://app.notion.com/p/9f812eb300aa82bda43b01dba68ad5ab?v=c0312eb300aa83c38a8d08cf7e52756e&source=copy_link"
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label="김재환 공부 자료 Notion 새 탭에서 열기"
+                    >
+                      <FileText weight="bold" aria-hidden="true" />
+                      <span>공부 자료</span>
+                    </a>
                   </div>
                 </div>
 
