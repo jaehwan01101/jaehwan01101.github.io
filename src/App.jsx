@@ -118,6 +118,18 @@ const projects = [
     title: "SecureVoiceGuard AWS 전환",
     description:
       "AI 음성 위변조 탐지 서비스의 단일 서버 구조를 트래픽 증가, 장애 복구와 반복 배포에 대응할 수 있는 AWS 관리형 아키텍처로 전환한 5인 프로젝트입니다.",
+    links: [
+      {
+        label: "GitHub 저장소",
+        href: "https://github.com/gpyo0111/mzc-terraform",
+        type: "github",
+      },
+      {
+        label: "발표 자료",
+        href: "https://docs.google.com/presentation/d/1IXRlWdI12M42YHH7nUg_96YOCvFX_Cbn/edit?usp=sharing&ouid=114572409741480545594&rtpof=true&sd=true",
+        type: "document",
+      },
+    ],
     caseStudy: [
       {
         number: "01",
@@ -247,6 +259,13 @@ const projects = [
     title: "OnPremises-MZC 티켓팅 인프라",
     description:
       "명절 예매 시점의 트래픽 폭증, 단일 장비 장애, 데이터 유실과 수동 장애 대응 문제를 해결하기 위해 네트워크부터 애플리케이션·데이터·관측 계층까지 통합 설계한 5인 프로젝트입니다.",
+    links: [
+      {
+        label: "GitHub 저장소",
+        href: "https://github.com/Kjihoo/OnPremises_Infra_Project",
+        type: "github",
+      },
+    ],
     overview: [
       "GNS3 기반 Front·Container·Data 3-Zone을 구성하고 HSRP 이중화 라우터, Bastion Host, Nginx Reverse Proxy·WAF·TLS·Rate Limit으로 진입 경로와 계층 간 접근을 통제했습니다.",
       "3-Node Kubernetes 클러스터에 FastAPI 서비스를 배포하고 HPA·Metrics Server, Liveness/Readiness Probe, Rolling Update, ConfigMap·Secret으로 확장성과 자가 치유·설정 분리를 구현했습니다.",
@@ -380,6 +399,24 @@ function ProjectCard({ project }) {
 
       <div className="project-preview">
         <p>{project.description}</p>
+        <ul className="project-links" aria-label={`${project.title} 관련 링크`}>
+          {project.links.map((link) => (
+            <li key={link.href}>
+              <a
+                className="project-link"
+                href={link.href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`${project.title} ${link.label} 새 탭에서 열기`}
+              >
+                {link.type === "github"
+                  ? <GithubLogo weight="fill" aria-hidden="true" />
+                  : <Article weight="bold" aria-hidden="true" />}
+                <span>{link.label}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
         <ul className="tag-list" aria-label={`${project.title} 주요 기술 스택`}>
           {project.tags.slice(0, 6).map((tag) => <li key={tag}>{tag}</li>)}
         </ul>

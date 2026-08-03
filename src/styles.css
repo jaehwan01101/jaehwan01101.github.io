@@ -412,6 +412,10 @@ kbd {
 .project-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
 .project-preview { padding: 0 24px 22px; }
 .project-preview > p { max-width: 980px; margin: 0 0 13px; color: #4d5561; font-size: 14px; font-weight: 650; line-height: 1.65; }
+.project-links { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 13px; padding: 0; list-style: none; }
+.project-link { display: inline-flex; min-height: 34px; align-items: center; gap: 7px; border: 1px solid #b9c8da; border-radius: 5px; background: #f7f9fc; padding: 6px 10px; color: var(--primary-dark); font-family: var(--font-mono); font-size: 10px; font-weight: 800; transition: transform 150ms ease, border-color 150ms ease, background 150ms ease, box-shadow 150ms ease; }
+.project-link:hover, .project-link:focus-visible { transform: translateY(-1px); border-color: #7f9fc5; background: white; box-shadow: 0 5px 14px rgba(37, 72, 116, .1); }
+.project-link svg { width: 15px; height: 15px; }
 .project-card.is-expanded .project-preview .tag-list { display: none; }
 .project-expanded-content { border-top: 1px solid var(--line-soft); padding-top: 24px; }
 .project-expanded-content[hidden] { display: none; }
