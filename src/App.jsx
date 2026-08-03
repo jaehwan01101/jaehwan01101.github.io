@@ -63,27 +63,6 @@ const certifications = [
 const experience = [
   {
     index: "01",
-    role: "2018.03 — 2026.08 / 졸업 예정",
-    company: "가천대학교 · 유럽어문학과 / 소프트웨어 복수전공",
-    description: [
-      "본전공인 유럽어문학과에서 독문학과 유럽의 문화·정치·제도를 공부하며 자료의 맥락과 근거를 구조화하고, 팀 프로젝트와 발표를 통해 의견을 조율하는 방법을 배웠습니다.",
-      "소프트웨어 복수전공에서는 C·Java·Python을 학습하고, 자료구조 및 실습·웹 프로그래밍·모바일 웹 프로그래밍·모바일프로그래밍·로봇공학 과목을 통해 소프트웨어 구현 경험을 넓혔습니다. 이를 바탕으로 클라우드·인프라 역량을 확장하고 있습니다.",
-    ],
-    tags: [
-      "C", "Java", "Python", "JavaScript", "HTML", "자료구조",
-      "웹 프로그래밍", "모바일 웹", "모바일 프로그래밍", "로봇공학",
-    ],
-  },
-  {
-    index: "02",
-    role: "2024.06 — 2024.12 / 현장실습",
-    company: "씨드젠 · 개인정보 처리방침 평가제 업무 지원",
-    description:
-      "개인정보보호위원회·KISA 협업 사업에서 국민생활 밀접 49개 기업의 처리방침을 검토했습니다. 26개 항목·42개 지표를 기준으로 기초자료와 평가 소견을 정리하며 보안 판단 기준과 문서화 방식을 익혔습니다.",
-    tags: ["Privacy", "Security Review", "Documentation"],
-  },
-  {
-    index: "03",
     role: "2025.12 — 2026.07 / 교육",
     company: "메가존클라우드 IT Bootcamp · Solution Architect",
     description:
@@ -107,6 +86,27 @@ const experience = [
       "Kubernetes", "AWS", "Terraform", "Jenkins", "GitHub Actions", "Argo CD",
       "CloudWatch", "Prometheus", "Grafana", "GCP", "GKE", "Python", "boto3",
       "Amazon Bedrock",
+    ],
+  },
+  {
+    index: "02",
+    role: "2024.06 — 2024.12 / 현장실습",
+    company: "씨드젠 · 개인정보 처리방침 평가제 업무 지원",
+    description:
+      "개인정보보호위원회·KISA 협업 사업에서 국민생활 밀접 49개 기업의 처리방침을 검토했습니다. 26개 항목·42개 지표를 기준으로 기초자료와 평가 소견을 정리하며 보안 판단 기준과 문서화 방식을 익혔습니다.",
+    tags: ["Privacy", "Security Review", "Documentation"],
+  },
+  {
+    index: "03",
+    role: "2018.03 — 2026.08 / 졸업 예정",
+    company: "가천대학교 · 유럽어문학과 / 소프트웨어 복수전공",
+    description: [
+      "본전공인 유럽어문학과에서 독문학과 유럽의 문화·정치·제도를 공부하며 자료의 맥락과 근거를 구조화하고, 팀 프로젝트와 발표를 통해 의견을 조율하는 방법을 배웠습니다.",
+      "소프트웨어 복수전공에서는 C·Java·Python을 학습하고, 자료구조 및 실습·웹 프로그래밍·모바일 웹 프로그래밍·모바일프로그래밍·로봇공학 과목을 통해 소프트웨어 구현 경험을 넓혔습니다. 이를 바탕으로 클라우드·인프라 역량을 확장하고 있습니다.",
+    ],
+    tags: [
+      "C", "Java", "Python", "JavaScript", "HTML", "자료구조",
+      "웹 프로그래밍", "모바일 웹", "모바일 프로그래밍", "로봇공학",
     ],
   },
 ];
