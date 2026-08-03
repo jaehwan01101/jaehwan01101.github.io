@@ -117,7 +117,7 @@ const projects = [
     spec: "PROJECT: 01 / TEAM PROJECT / 2026.05 — 2026.07",
     title: "SecureVoiceGuard AWS 전환",
     description:
-      "AI 음성 위변조 탐지 서비스의 단일 서버 구조를 트래픽 증가, AI 추론 부하, 장애 복구와 반복 배포에 대응할 수 있는 AWS 관리형 아키텍처로 전환한 5인 프로젝트입니다.",
+      "AI 음성 위변조 탐지 서비스의 단일 서버 구조를 트래픽 증가, 장애 복구와 반복 배포에 대응할 수 있는 AWS 관리형 아키텍처로 전환한 5인 프로젝트입니다.",
     caseStudy: [
       {
         number: "01",
@@ -238,6 +238,8 @@ const projects = [
       "CloudWatch 지표·Slack 알람·복구 Runbook으로 관측과 대응 절차 문서화",
       "Terraform을 persistent/runtime 계층으로 분리하고 S3 state 기반 협업 구조 정리",
     ],
+    detailsTitle: "담당 내용 — DB 인프라 고도화",
+    prioritizeDetails: true,
   },
   {
     id: "onprem-ticketing",
@@ -383,6 +385,19 @@ function ProjectCard({ project }) {
       </div>
 
       <div id={contentId} className="project-expanded-content" hidden={!expanded}>
+        {project.prioritizeDetails && (
+          <div className="project-priority-details">
+            <div className="project-details">
+              <p className="project-summary-label">{project.detailsTitle}</p>
+              <ul>
+                {project.details.map((detail) => (
+                  <li key={detail}><CheckCircle weight="fill" aria-hidden="true" />{detail}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        )}
+
         <figure className="project-figure">
           <figcaption>
             <span><ImageIcon aria-hidden="true" /> {project.imageLabel}</span>
@@ -445,14 +460,16 @@ function ProjectCard({ project }) {
           <ul className="tag-list" aria-label={`${project.title} 전체 기술 스택`}>
             {project.tags.map((tag) => <li key={tag}>{tag}</li>)}
           </ul>
-          <div className="project-details">
-            <p className="project-summary-label">담당 내용</p>
-            <ul>
-              {project.details.map((detail) => (
-                <li key={detail}><CheckCircle weight="fill" aria-hidden="true" />{detail}</li>
-              ))}
-            </ul>
-          </div>
+          {!project.prioritizeDetails && (
+            <div className="project-details">
+              <p className="project-summary-label">{project.detailsTitle ?? "담당 내용"}</p>
+              <ul>
+                {project.details.map((detail) => (
+                  <li key={detail}><CheckCircle weight="fill" aria-hidden="true" />{detail}</li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     </article>
