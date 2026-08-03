@@ -271,6 +271,7 @@ const projects = [
       "Redis Cache-Aside 패턴으로 조회 부하와 응답 시간을 개선",
       "Redis StatefulSet에 Longhorn PVC를 연결해 Pod 재생성 후 데이터 유지 검증",
     ],
+    prioritizeDetails: true,
   },
 ];
 
@@ -388,7 +389,7 @@ function ProjectCard({ project }) {
         {project.prioritizeDetails && (
           <div className="project-priority-details">
             <div className="project-details">
-              <p className="project-summary-label">{project.detailsTitle}</p>
+              <p className="project-summary-label">{project.detailsTitle ?? "담당 내용"}</p>
               <ul>
                 {project.details.map((detail) => (
                   <li key={detail}><CheckCircle weight="fill" aria-hidden="true" />{detail}</li>
