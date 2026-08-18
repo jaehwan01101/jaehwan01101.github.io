@@ -823,7 +823,7 @@ export function App() {
                 <figure className="profile-file">
                   <figcaption>
                     <span><ImageIcon aria-hidden="true" /> profile-jaehwan.jpg</span>
-                    <span>398 × 512</span>
+                    <span>472 × 606</span>
                   </figcaption>
                   <div className="portrait-wrap">
                     <img src="/assets/profile-jaehwan.jpg" alt="김재환 프로필 사진" />
