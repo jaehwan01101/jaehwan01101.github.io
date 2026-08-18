@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "Pretendard Variable";
+  font-style: normal;
+  font-weight: 45 920;
+  font-display: swap;
+  src: url("/assets/fonts/pretendard/PretendardVariable.woff2") format("woff2-variations");
+}
+
 :root {
   color-scheme: light;
   --chrome: #f3f3f3;
@@ -19,8 +27,8 @@
   --yellow: #f4bf4f;
   --green-dot: #61c454;
   --shadow: 0 16px 40px rgba(40, 61, 88, 0.12);
-  --font-ui: "Hanken Grotesk Variable", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
-  --font-mono: "JetBrains Mono Variable", "SFMono-Regular", Consolas, monospace;
+  --font-ui: "Hanken Grotesk Variable", "Pretendard Variable", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  --font-mono: "JetBrains Mono Variable", "Pretendard Variable", "SFMono-Regular", Consolas, monospace;
 }
 
 * { box-sizing: border-box; }
