@@ -27,18 +27,18 @@ import {
 const sections = [
   { id: "profile", label: "Profile", file: "profile.md", icon: User },
   {
-    id: "certifications",
-    label: "Certificates",
-    file: "certifications.md",
-    icon: FileText,
-  },
-  {
     id: "experience",
     label: "Growth",
     file: "growth.log",
     icon: ClockCounterClockwise,
   },
   { id: "projects", label: "Projects", file: "projects.json", icon: Cube },
+  {
+    id: "certifications",
+    label: "Certificates",
+    file: "certifications.md",
+    icon: FileText,
+  },
   { id: "contact", label: "Contact", file: "contact.txt", icon: At },
 ];
 
