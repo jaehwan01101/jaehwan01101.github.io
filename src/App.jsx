@@ -836,28 +836,8 @@ export function App() {
               </div>
             </section>
 
-            <section id="certifications" className="editor-section certifications-section" aria-labelledby="certifications-title">
-              <LineRail start={27} count={18} />
-              <div className="section-content">
-                <div className="section-heading">
-                  <div><p className="eyebrow">CERTIFICATIONS.MD</p><h2 id="certifications-title">자격 및 준비 현황</h2></div>
-                  <span className="section-command">3 credentials</span>
-                </div>
-                <div className="certification-grid">
-                  {certifications.map((certification) => (
-                    <article className={`certification-card is-${certification.state}`} key={certification.name}>
-                      <div>
-                        <h3>{certification.name}</h3>
-                        <p>{certification.status}</p>
-                      </div>
-                    </article>
-                  ))}
-                </div>
-              </div>
-            </section>
-
             <section id="experience" className="editor-section experience-section" aria-labelledby="experience-title">
-              <LineRail start={45} count={26} />
+              <LineRail start={27} count={26} />
               <div className="section-content">
                 <div className="section-heading">
                   <div><p className="eyebrow">GROWTH.LOG</p><h2 id="experience-title">성장 과정</h2></div>
@@ -889,7 +869,7 @@ export function App() {
             </section>
 
             <section id="projects" className="editor-section projects-section" aria-labelledby="projects-title">
-              <LineRail start={71} count={34} />
+              <LineRail start={53} count={34} />
               <div className="section-content">
                 <div className="section-heading">
                   <div><p className="eyebrow">PROJECTS.JSON</p><h2 id="projects-title">요구사항을 구현한 프로젝트</h2></div>
@@ -897,6 +877,26 @@ export function App() {
                 </div>
                 <div className="project-grid">
                   {projects.map((project) => <ProjectCard key={project.id} project={project} />)}
+                </div>
+              </div>
+            </section>
+
+            <section id="certifications" className="editor-section certifications-section" aria-labelledby="certifications-title">
+              <LineRail start={87} count={18} />
+              <div className="section-content">
+                <div className="section-heading">
+                  <div><p className="eyebrow">CERTIFICATIONS.MD</p><h2 id="certifications-title">자격 및 준비 현황</h2></div>
+                  <span className="section-command">3 credentials</span>
+                </div>
+                <div className="certification-grid">
+                  {certifications.map((certification) => (
+                    <article className={`certification-card is-${certification.state}`} key={certification.name}>
+                      <div>
+                        <h3>{certification.name}</h3>
+                        <p>{certification.status}</p>
+                      </div>
+                    </article>
+                  ))}
                 </div>
               </div>
             </section>
