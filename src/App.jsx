@@ -46,21 +46,24 @@ const certifications = [
   {
     name: "SAA-C03",
     subtitle: "Solutions Architect - Associate",
-    status: "AWS | 2026.08.28",
+    issuer: "AWS",
+    date: "2026.08.28",
     state: "earned",
     image: "/assets/aws-saa-c03-badge.jpg",
     imageAlt: "AWS Certified Solutions Architect Associate 배지",
   },
   {
     name: "리눅스마스터 2급",
-    status: "한국정보통신진흥협회(KAIT) | 2026.04.03",
+    issuer: "한국정보통신진흥협회(KAIT)",
+    date: "2026.04.03",
     state: "earned",
     image: "/assets/linux-logo.jpg",
     imageAlt: "Linux 로고",
   },
   {
     name: "정보처리기사",
-    status: "필기 합격 → 실기 준비 중",
+    issuer: "필기 합격",
+    date: "실기 준비 중",
     state: "in-progress",
   },
 ];
@@ -891,30 +894,44 @@ export function App() {
               <div className="section-content">
                 <div className="section-heading">
                   <div><p className="eyebrow">CERTIFICATIONS.MD</p><h2 id="certifications-title">자격 및 준비 현황</h2></div>
-                  <span className="section-command">3 credentials</span>
                 </div>
-                <div className="certification-grid">
-                  {certifications.map((certification) => (
-                    <article
-                      className={`certification-card is-${certification.state}${certification.image ? " has-image" : ""}`}
-                      key={certification.name}
-                    >
-                      <div className="certification-copy">
-                        <h3>
-                          {certification.name}
-                          {certification.subtitle && <small>({certification.subtitle})</small>}
-                        </h3>
-                        <p>{certification.status}</p>
-                      </div>
-                      {certification.image && (
-                        <img
-                          className="certification-image"
-                          src={certification.image}
-                          alt={certification.imageAlt}
-                        />
-                      )}
-                    </article>
-                  ))}
+                <div className="certification-workbench">
+                  <div className="certification-list-panel">
+                    <div className="certification-list-header" aria-hidden="true">
+                      <span>자격명</span>
+                      <span>발급 · 상태</span>
+                      <span>배지</span>
+                    </div>
+                    <div className="certification-list" role="list" aria-label="자격 및 준비 현황">
+                      {certifications.map((certification) => {
+                        const StatusIcon = certification.state === "earned" ? CheckCircle : Circle;
+                        return (
+                          <article
+                            className={`certification-row is-${certification.state}`}
+                            key={certification.name}
+                            role="listitem"
+                          >
+                            <StatusIcon weight={certification.state === "earned" ? "fill" : "regular"} aria-hidden="true" />
+                            <span className="certification-row-name">
+                              <strong>{certification.name}</strong>
+                              {certification.subtitle && <small>{certification.subtitle}</small>}
+                            </span>
+                            <span className="certification-row-meta">
+                              <strong>{certification.issuer}</strong>
+                              <small>{certification.date}</small>
+                            </span>
+                            <span className="certification-row-visual">
+                              {certification.image ? (
+                                <img src={certification.image} alt={certification.imageAlt} />
+                              ) : (
+                                <FileText aria-hidden="true" />
+                              )}
+                            </span>
+                          </article>
+                        );
+                      })}
+                    </div>
+                  </div>
                 </div>
               </div>
             </section>
