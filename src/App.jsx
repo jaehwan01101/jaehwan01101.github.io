@@ -52,6 +52,7 @@ const certifications = [
     name: "리눅스마스터 2급",
     status: "한국정보통신진흥협회(KAIT) | 2026.04.03",
     state: "earned",
+    image: "/assets/linux-logo.jpg",
   },
   {
     name: "정보처리기사",
@@ -891,10 +892,17 @@ export function App() {
                 <div className="certification-grid">
                   {certifications.map((certification) => (
                     <article className={`certification-card is-${certification.state}`} key={certification.name}>
-                      <div>
+                      <div className="certification-copy">
                         <h3>{certification.name}</h3>
                         <p>{certification.status}</p>
                       </div>
+                      {certification.image && (
+                        <img
+                          className="certification-image"
+                          src={certification.image}
+                          alt="Linux 로고"
+                        />
+                      )}
                     </article>
                   ))}
                 </div>
