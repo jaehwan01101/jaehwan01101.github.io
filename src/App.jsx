@@ -46,7 +46,7 @@ const certifications = [
   {
     name: "SAA-C03",
     subtitle: "Solutions Architect - Associate",
-    issuer: "AWS",
+    issuer: "Amazon Web Services (AWS)",
     date: "2026.08.28",
     state: "earned",
     image: "/assets/aws-saa-c03-badge.jpg",
