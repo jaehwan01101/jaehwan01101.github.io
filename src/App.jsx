@@ -982,7 +982,7 @@ export function App() {
       </div>
 
       <footer className="statusbar">
-        <span><GitBranch weight="bold" aria-hidden="true" /> codex/personalize-profile</span>
+        <span><GitBranch weight="bold" aria-hidden="true" /> personalize-profile</span>
         <span><CheckCircle weight="fill" aria-hidden="true" /> 0 errors</span>
         <span className="statusbar-spacer" />
         <span>{activeMeta.file}</span>
