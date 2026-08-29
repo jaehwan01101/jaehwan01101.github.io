@@ -45,6 +45,7 @@ const sections = [
 const certifications = [
   {
     name: "SAA-C03",
+    subtitle: "Solutions Architect - Associate",
     status: "AWS | 2026.08.28",
     state: "earned",
     image: "/assets/aws-saa-c03-badge.jpg",
@@ -894,9 +895,15 @@ export function App() {
                 </div>
                 <div className="certification-grid">
                   {certifications.map((certification) => (
-                    <article className={`certification-card is-${certification.state}`} key={certification.name}>
+                    <article
+                      className={`certification-card is-${certification.state}${certification.image ? " has-image" : ""}`}
+                      key={certification.name}
+                    >
                       <div className="certification-copy">
-                        <h3>{certification.name}</h3>
+                        <h3>
+                          {certification.name}
+                          {certification.subtitle && <small>({certification.subtitle})</small>}
+                        </h3>
                         <p>{certification.status}</p>
                       </div>
                       {certification.image && (
