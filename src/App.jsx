@@ -44,6 +44,11 @@ const sections = [
 
 const certifications = [
   {
+    name: "SAA-C03",
+    status: "AWS | 2026.08.28",
+    state: "earned",
+  },
+  {
     name: "리눅스마스터 2급",
     status: "한국정보통신진흥협회(KAIT) | 2026.04.03",
     state: "earned",
@@ -52,11 +57,6 @@ const certifications = [
     name: "정보처리기사",
     status: "필기 합격 → 실기 준비 중",
     state: "in-progress",
-  },
-  {
-    name: "AWS Certified Solutions Architect – Associate",
-    status: "AWS Training and Certification | 2026.08.28",
-    state: "earned",
   },
 ];
 
