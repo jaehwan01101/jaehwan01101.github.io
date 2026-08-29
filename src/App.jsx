@@ -54,9 +54,9 @@ const certifications = [
     state: "in-progress",
   },
   {
-    name: "AWS Solutions Architect – Associate",
-    status: "SAA-C03 준비 중",
-    state: "in-progress",
+    name: "AWS Certified Solutions Architect – Associate",
+    status: "AWS Training and Certification | 2026.08.29",
+    state: "earned",
   },
 ];
 
