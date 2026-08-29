@@ -55,7 +55,7 @@ const certifications = [
   },
   {
     name: "AWS Certified Solutions Architect – Associate",
-    status: "AWS Training and Certification | 2026.08.29",
+    status: "AWS Training and Certification | 2026.08.28",
     state: "earned",
   },
 ];
