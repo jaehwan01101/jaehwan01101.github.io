@@ -47,12 +47,15 @@ const certifications = [
     name: "SAA-C03",
     status: "AWS | 2026.08.28",
     state: "earned",
+    image: "/assets/aws-saa-c03-badge.jpg",
+    imageAlt: "AWS Certified Solutions Architect Associate 배지",
   },
   {
     name: "리눅스마스터 2급",
     status: "한국정보통신진흥협회(KAIT) | 2026.04.03",
     state: "earned",
     image: "/assets/linux-logo.jpg",
+    imageAlt: "Linux 로고",
   },
   {
     name: "정보처리기사",
@@ -900,7 +903,7 @@ export function App() {
                         <img
                           className="certification-image"
                           src={certification.image}
-                          alt="Linux 로고"
+                          alt={certification.imageAlt}
                         />
                       )}
                     </article>
