@@ -65,6 +65,8 @@ const certifications = [
     issuer: "필기 합격",
     date: "실기 준비 중",
     state: "in-progress",
+    image: "/assets/information-processing-engineer-badge.png",
+    imageAlt: "정보처리기사 국가기술자격 배지",
   },
 ];
 
@@ -89,12 +91,6 @@ const experience = [
       "GCP·GKE 및 멀티클라우드 구성",
       "Python·boto3 기반 클라우드 자동화와 Bedrock 기초 실습",
     ],
-    tags: [
-      "Linux", "GNS3", "Cisco Packet Tracer", "MySQL", "Redis", "Docker",
-      "Kubernetes", "AWS", "Terraform", "Jenkins", "GitHub Actions", "Argo CD",
-      "CloudWatch", "Prometheus", "Grafana", "GCP", "GKE", "Python", "boto3",
-      "Amazon Bedrock",
-    ],
   },
   {
     index: "02",
@@ -102,7 +98,6 @@ const experience = [
     company: "씨드젠 · 개인정보 처리방침 평가제 업무 지원",
     description:
       "개인정보보호위원회·KISA 협업 사업에서 국민생활 밀접 49개 기업의 처리방침을 검토했습니다. 26개 항목·42개 지표를 기준으로 기초자료와 평가 소견을 정리하며 보안 판단 기준과 문서화 방식을 익혔습니다.",
-    tags: ["Privacy", "Security Review", "Documentation"],
   },
   {
     index: "03",
@@ -111,10 +106,6 @@ const experience = [
     description: [
       "본전공인 유럽어문학과에서 독문학과 유럽의 문화·정치·제도를 공부하며 자료의 맥락과 근거를 구조화하고, 팀 프로젝트와 발표를 통해 의견을 조율하는 방법을 배웠습니다.",
       "소프트웨어 복수전공에서는 C·Java·Python을 학습하고, 자료구조 및 실습·웹 프로그래밍·모바일 웹 프로그래밍·모바일프로그래밍·로봇공학 과목을 통해 소프트웨어 구현 경험을 넓혔습니다. 이를 바탕으로 클라우드·인프라 역량을 확장하고 있습니다.",
-    ],
-    tags: [
-      "C", "Java", "Python", "JavaScript", "HTML", "자료구조",
-      "웹 프로그래밍", "모바일 웹", "모바일 프로그래밍", "로봇공학",
     ],
   },
 ];
@@ -772,28 +763,6 @@ export function App() {
                     <br />
                     <strong>'무엇을 왜 이렇게 설계했는지' 설명하고 책임</strong>지며 운영 프로세스를 문서화하는 엔지니어를 지향합니다.
                   </p>
-                  <ul className="tag-list hero-tags" aria-label="기술 역량">
-                    <li>AWS</li>
-                    <li>GCP</li>
-                    <li>GKE</li>
-                    <li>Kubernetes</li>
-                    <li>Docker</li>
-                    <li>Terraform</li>
-                    <li>Jenkins</li>
-                    <li>GitHub Actions</li>
-                    <li>Argo CD</li>
-                    <li>Python</li>
-                    <li>boto3</li>
-                    <li>Linux</li>
-                    <li>GNS3</li>
-                    <li>Cisco Packet Tracer</li>
-                    <li>MySQL</li>
-                    <li>PostgreSQL</li>
-                    <li>Redis</li>
-                    <li>Longhorn</li>
-                    <li>Prometheus</li>
-                    <li>Grafana</li>
-                  </ul>
                   <div className="profile-links" aria-label="외부 프로필 링크">
                     <a
                       className="profile-link"
@@ -866,9 +835,6 @@ export function App() {
                             {item.curriculum.map((subject) => <li key={subject}>{subject}</li>)}
                           </ul>
                         )}
-                        <ul className="tag-list" aria-label={`${item.company} 관련 기술`}>
-                          {item.tags.map((tag) => <li key={tag}>{tag}</li>)}
-                        </ul>
                       </div>
                     </article>
                   ))}
