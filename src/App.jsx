@@ -63,7 +63,7 @@ const certifications = [
   {
     name: "정보처리기사",
     issuer: "필기 합격",
-    date: "실기 준비 중",
+    date: "실기 준비 중 (2026.10.25 시험 예정)",
     state: "in-progress",
     image: "/assets/information-processing-engineer-badge.png",
     imageAlt: "정보처리기사 국가기술자격 배지",
@@ -101,7 +101,7 @@ const experience = [
   },
   {
     index: "03",
-    role: "2018.03 — 2026.08 / 졸업 예정",
+    role: "2018.03 — 2026.08",
     company: "가천대학교 · 유럽어문학과 / 소프트웨어 복수전공",
     description: [
       "본전공인 유럽어문학과에서 독문학과 유럽의 문화·정치·제도를 공부하며 자료의 맥락과 근거를 구조화하고, 팀 프로젝트와 발표를 통해 의견을 조율하는 방법을 배웠습니다.",
@@ -367,12 +367,36 @@ function SectionLink({ section, active, onNavigate }) {
   );
 }
 
+function trackSurfacePointer(event) {
+  if (event.pointerType === "touch") return;
+  const surface = event.currentTarget;
+  const rect = surface.getBoundingClientRect();
+  const x = Math.min(Math.max(event.clientX - rect.left, 0), rect.width);
+  const y = Math.min(Math.max(event.clientY - rect.top, 0), rect.height);
+  const tiltX = ((y / rect.height) - 0.5) * -2.4;
+  const tiltY = ((x / rect.width) - 0.5) * 2.4;
+
+  surface.style.setProperty("--surface-x", `${x}px`);
+  surface.style.setProperty("--surface-y", `${y}px`);
+  surface.style.setProperty("--tilt-x", `${tiltX.toFixed(2)}deg`);
+  surface.style.setProperty("--tilt-y", `${tiltY.toFixed(2)}deg`);
+}
+
+function resetSurfacePointer(event) {
+  const surface = event.currentTarget;
+  surface.style.setProperty("--tilt-x", "0deg");
+  surface.style.setProperty("--tilt-y", "0deg");
+}
+
 function ProjectCard({ project }) {
   const [expanded, setExpanded] = useState(false);
   const contentId = `${project.id}-content`;
 
   return (
-    <article className={`project-card ${expanded ? "is-expanded" : ""}`}>
+    <article
+      className={`project-card ${expanded ? "is-expanded" : ""}`}
+      data-reveal
+    >
       <div className="project-heading">
         <div>
           <p className="eyebrow">{project.spec}</p>
@@ -421,92 +445,99 @@ function ProjectCard({ project }) {
         </ul>
       </div>
 
-      <div id={contentId} className="project-expanded-content" hidden={!expanded}>
-        {project.prioritizeDetails && (
-          <div className="project-priority-details">
-            <div className="project-details">
-              <p className="project-summary-label">{project.detailsTitle ?? "담당 내용"}</p>
-              <ul>
-                {project.details.map((detail) => (
-                  <li key={detail}><CheckCircle weight="fill" aria-hidden="true" />{detail}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        )}
-
-        <figure className="project-figure">
-          <figcaption>
-            <span><ImageIcon aria-hidden="true" /> {project.imageLabel}</span>
-            <span className="figure-format">AUTO FIT</span>
-          </figcaption>
-          <div className="project-image-wrap">
-            <img
-              className={`project-image project-image-${project.fit}`}
-              src={project.image}
-              alt={project.imageAlt}
-              loading="lazy"
-            />
-          </div>
-        </figure>
-
-        <div className="project-body">
-          <div className="project-summary">
-            {project.caseStudy ? (
-              <div className="project-case-study">
-                {project.caseStudy.map((section) => (
-                  <section className="case-study-section" key={section.number} aria-labelledby={`${project.id}-${section.title}`}>
-                    <div className="case-study-heading">
-                      <span className="case-study-number" aria-hidden="true">{section.number}</span>
-                      <div>
-                        <p>{section.title}</p>
-                        <h4 id={`${project.id}-${section.title}`}>{section.subtitle}</h4>
-                      </div>
-                    </div>
-                    {section.intro && <p className="case-study-intro">{section.intro}</p>}
-                    {section.items && (
-                      <ul className="case-study-list">
-                        {section.items.map((item) => <li key={item}>{item}</li>)}
-                      </ul>
-                    )}
-                    {section.groups && (
-                      <div className="case-study-groups">
-                        {section.groups.map((group) => (
-                          <section className="case-study-group" key={group.title}>
-                            <h5>{group.title}</h5>
-                            <ul className="case-study-list">
-                              {group.items.map((item) => <li key={item}>{item}</li>)}
-                            </ul>
-                          </section>
-                        ))}
-                      </div>
-                    )}
-                  </section>
-                ))}
-              </div>
-            ) : (
-              <>
-                <p className="project-summary-label">요구사항 및 아키텍처 설계</p>
-                <ul className="project-overview">
-                  {project.overview.map((item) => <li key={item}>{item}</li>)}
+      <div
+        id={contentId}
+        className="project-expand-shell"
+        aria-hidden={!expanded}
+        inert={!expanded}
+      >
+        <div className="project-expanded-content">
+          {project.prioritizeDetails && (
+            <div className="project-priority-details">
+              <div className="project-details">
+                <p className="project-summary-label">{project.detailsTitle ?? "담당 내용"}</p>
+                <ul>
+                  {project.details.map((detail) => (
+                    <li key={detail}><CheckCircle weight="fill" aria-hidden="true" />{detail}</li>
+                  ))}
                 </ul>
-              </>
-            )}
-          </div>
-          <p className="project-stack-label">기술 스택</p>
-          <ul className="tag-list" aria-label={`${project.title} 전체 기술 스택`}>
-            {project.tags.map((tag) => <li key={tag}>{tag}</li>)}
-          </ul>
-          {!project.prioritizeDetails && (
-            <div className="project-details">
-              <p className="project-summary-label">{project.detailsTitle ?? "담당 내용"}</p>
-              <ul>
-                {project.details.map((detail) => (
-                  <li key={detail}><CheckCircle weight="fill" aria-hidden="true" />{detail}</li>
-                ))}
-              </ul>
+              </div>
             </div>
           )}
+
+          <figure className="project-figure">
+            <figcaption>
+              <span><ImageIcon aria-hidden="true" /> {project.imageLabel}</span>
+              <span className="figure-format">AUTO FIT</span>
+            </figcaption>
+            <div className="project-image-wrap">
+              <img
+                className={`project-image project-image-${project.fit}`}
+                src={project.image}
+                alt={project.imageAlt}
+                loading="lazy"
+              />
+            </div>
+          </figure>
+
+          <div className="project-body">
+            <div className="project-summary">
+              {project.caseStudy ? (
+                <div className="project-case-study">
+                  {project.caseStudy.map((section) => (
+                    <section className="case-study-section" key={section.number} aria-labelledby={`${project.id}-${section.title}`}>
+                      <div className="case-study-heading">
+                        <span className="case-study-number" aria-hidden="true">{section.number}</span>
+                        <div>
+                          <p>{section.title}</p>
+                          <h4 id={`${project.id}-${section.title}`}>{section.subtitle}</h4>
+                        </div>
+                      </div>
+                      {section.intro && <p className="case-study-intro">{section.intro}</p>}
+                      {section.items && (
+                        <ul className="case-study-list">
+                          {section.items.map((item) => <li key={item}>{item}</li>)}
+                        </ul>
+                      )}
+                      {section.groups && (
+                        <div className="case-study-groups">
+                          {section.groups.map((group) => (
+                            <section className="case-study-group" key={group.title}>
+                              <h5>{group.title}</h5>
+                              <ul className="case-study-list">
+                                {group.items.map((item) => <li key={item}>{item}</li>)}
+                              </ul>
+                            </section>
+                          ))}
+                        </div>
+                      )}
+                    </section>
+                  ))}
+                </div>
+              ) : (
+                <>
+                  <p className="project-summary-label">요구사항 및 아키텍처 설계</p>
+                  <ul className="project-overview">
+                    {project.overview.map((item) => <li key={item}>{item}</li>)}
+                  </ul>
+                </>
+              )}
+            </div>
+            <p className="project-stack-label">기술 스택</p>
+            <ul className="tag-list" aria-label={`${project.title} 전체 기술 스택`}>
+              {project.tags.map((tag) => <li key={tag}>{tag}</li>)}
+            </ul>
+            {!project.prioritizeDetails && (
+              <div className="project-details">
+                <p className="project-summary-label">{project.detailsTitle ?? "담당 내용"}</p>
+                <ul>
+                  {project.details.map((detail) => (
+                    <li key={detail}><CheckCircle weight="fill" aria-hidden="true" />{detail}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </article>
@@ -601,6 +632,16 @@ export function App() {
       const maxScroll = editor.scrollHeight - editor.clientHeight;
       setScrollProgress(maxScroll > 0 ? Math.round((editor.scrollTop / maxScroll) * 100) : 0);
 
+      const timeline = editor.querySelector(".timeline");
+      if (timeline) {
+        const editorRect = editor.getBoundingClientRect();
+        const timelineRect = timeline.getBoundingClientRect();
+        const start = editorRect.top + editor.clientHeight * 0.68;
+        const distance = Math.max(timelineRect.height - editor.clientHeight * 0.18, 1);
+        const timelineProgress = Math.min(Math.max((start - timelineRect.top) / distance, 0), 1);
+        timeline.style.setProperty("--timeline-progress", timelineProgress.toFixed(3));
+      }
+
       const anchor = editor.getBoundingClientRect().top + Math.min(180, editor.clientHeight * 0.28);
       let current = sections[0].id;
       sections.forEach(({ id }) => {
@@ -613,6 +654,45 @@ export function App() {
     editor.addEventListener("scroll", updateScrollState, { passive: true });
     updateScrollState();
     return () => editor.removeEventListener("scroll", updateScrollState);
+  }, []);
+
+  useEffect(() => {
+    const editor = editorRef.current;
+    if (!editor) return undefined;
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const revealTargets = [...editor.querySelectorAll("[data-reveal]")];
+    const revealTarget = (target) => {
+      target.classList.add("is-revealed");
+      target.style.setProperty("--reveal-y", "0px");
+      target.style.setProperty("--reveal-scale", "1");
+      target.style.opacity = "1";
+      target.style.filter = "none";
+    };
+
+    if (reduceMotion || !("IntersectionObserver" in window)) {
+      revealTargets.forEach(revealTarget);
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        revealTarget(entry.target);
+        observer.unobserve(entry.target);
+      });
+    }, {
+      root: editor,
+      rootMargin: "0px 0px -2% 0px",
+      threshold: 0.04,
+    });
+
+    revealTargets.forEach((target, index) => {
+      target.style.setProperty("--reveal-order", String(index % 4));
+      observer.observe(target);
+    });
+
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -736,7 +816,7 @@ export function App() {
 
         <main className="editor-pane" aria-label="김재환 포트폴리오">
           <div className="editor-tabbar">
-            <div className="editor-tab is-active">
+            <div className="editor-tab is-active" key={activeMeta.file}>
               <activeMeta.icon weight="fill" aria-hidden="true" />
               <span>{activeMeta.file}</span>
               <span className="tab-dot" aria-label="저장됨">●</span>
@@ -747,10 +827,10 @@ export function App() {
           </div>
 
           <div className="editor-scroll" ref={editorRef}>
-            <section id="profile" className="editor-section profile-section" aria-labelledby="profile-title">
+            <section id="profile" className={`editor-section profile-section ${activeSection === "profile" ? "is-section-active" : ""}`} aria-labelledby="profile-title">
               <LineRail start={1} count={26} />
               <div className="section-content profile-grid">
-                <div className="profile-copy">
+                <div className="profile-copy" data-reveal>
                   <p className="terminal-prompt"><span>root@devconsole</span>:~$ ./whoami.sh</p>
                   <p className="eyebrow">PROFILE / CLOUD INFRASTRUCTURE</p>
                   <h1 id="profile-title" aria-label="김재환 — 클라우드 & 인프라 엔지니어">
@@ -797,7 +877,12 @@ export function App() {
                   </div>
                 </div>
 
-                <figure className="profile-file">
+                <figure
+                  className="profile-file"
+                  data-reveal
+                  onPointerMove={trackSurfacePointer}
+                  onPointerLeave={resetSurfacePointer}
+                >
                   <figcaption>
                     <span><ImageIcon aria-hidden="true" /> profile-jaehwan.jpg</span>
                     <span>472 × 606</span>
@@ -813,16 +898,16 @@ export function App() {
               </div>
             </section>
 
-            <section id="experience" className="editor-section experience-section" aria-labelledby="experience-title">
+            <section id="experience" className={`editor-section experience-section ${activeSection === "experience" ? "is-section-active" : ""}`} aria-labelledby="experience-title">
               <LineRail start={27} count={26} />
               <div className="section-content">
-                <div className="section-heading">
+                <div className="section-heading" data-reveal>
                   <div><p className="eyebrow">GROWTH.LOG</p><h2 id="experience-title">성장 과정</h2></div>
                   <span className="section-command">$ tail -f growth.log</span>
                 </div>
                 <div className="timeline">
                   {experience.map((item) => (
-                    <article className="timeline-item" key={item.index}>
+                    <article className="timeline-item" key={item.index} data-reveal>
                       <div className="timeline-index"><span>{item.index}</span></div>
                       <div className="timeline-copy">
                         <p className="timeline-role">{item.role}</p>
@@ -842,10 +927,10 @@ export function App() {
               </div>
             </section>
 
-            <section id="projects" className="editor-section projects-section" aria-labelledby="projects-title">
+            <section id="projects" className={`editor-section projects-section ${activeSection === "projects" ? "is-section-active" : ""}`} aria-labelledby="projects-title">
               <LineRail start={53} count={34} />
               <div className="section-content">
-                <div className="section-heading">
+                <div className="section-heading" data-reveal>
                   <div><p className="eyebrow">PROJECTS.JSON</p><h2 id="projects-title">요구사항을 구현한 프로젝트</h2></div>
                   <span className="section-command">2 verified projects</span>
                 </div>
@@ -855,10 +940,10 @@ export function App() {
               </div>
             </section>
 
-            <section id="certifications" className="editor-section certifications-section" aria-labelledby="certifications-title">
+            <section id="certifications" className={`editor-section certifications-section ${activeSection === "certifications" ? "is-section-active" : ""}`} aria-labelledby="certifications-title">
               <LineRail start={87} count={18} />
               <div className="section-content">
-                <div className="section-heading">
+                <div className="section-heading" data-reveal>
                   <div><p className="eyebrow">CERTIFICATIONS.MD</p><h2 id="certifications-title">자격 및 준비 현황</h2></div>
                 </div>
                 <div className="certification-workbench">
@@ -876,6 +961,9 @@ export function App() {
                             className={`certification-row is-${certification.state}`}
                             key={certification.name}
                             role="listitem"
+                            data-reveal
+                            onPointerMove={trackSurfacePointer}
+                            onPointerLeave={resetSurfacePointer}
                           >
                             <StatusIcon weight={certification.state === "earned" ? "fill" : "regular"} aria-hidden="true" />
                             <span className="certification-row-name">
@@ -902,30 +990,35 @@ export function App() {
               </div>
             </section>
 
-            <section id="contact" className="editor-section contact-section" aria-labelledby="contact-title">
+            <section id="contact" className={`editor-section contact-section ${activeSection === "contact" ? "is-section-active" : ""}`} aria-labelledby="contact-title">
               <LineRail start={105} count={22} />
               <div className="section-content contact-grid">
-                <div>
+                <div data-reveal>
                   <p className="terminal-prompt"><span>visitor@portfolio</span>:~$ open contact.txt</p>
                   <p className="eyebrow">STRENGTHS / CONTACT</p>
                   <h2 id="contact-title">저는 이러한 강점을 가진 엔지니어입니다.</h2>
                   <p className="strengths-intro">기술을 깊이 이해하고, 사람들과 함께 더 나은 결과를 만들며, 고객에게 전달되는 가치를 먼저 생각합니다.</p>
                   <ul className="strength-list" aria-label="김재환의 강점">
-                    <li>
+                    <li data-reveal>
                       <strong>학습 의지</strong>
                       <span>기술을 사용하는 데 그치지 않고 작동 원리와 세부 구조를 계속 파고들어 이해합니다. 관련 도서를 꾸준히 읽으며 배운 지식을 더 깊고 넓게 확장합니다.</span>
                     </li>
-                    <li>
+                    <li data-reveal>
                       <strong>협업 능력</strong>
                       <span>편안하게 의견을 나눌 수 있는 분위기를 만들고, 서로 다른 관점을 경청해 팀이 실행할 수 있는 합의점으로 조율합니다.</span>
                     </li>
-                    <li>
+                    <li data-reveal>
                       <strong>고객 우선</strong>
                       <span>기술적 선택이 최종 사용자에게 미치는 영향과 경험을 먼저 살피고, 고객에게 더 안정적이고 편리한 결과를 만드는 방향으로 결정합니다.</span>
                     </li>
                   </ul>
                 </div>
-                <div className="contact-card">
+                <div
+                  className="contact-card"
+                  data-reveal
+                  onPointerMove={trackSurfacePointer}
+                  onPointerLeave={resetSurfacePointer}
+                >
                   <p className="contact-status"><CheckCircle weight="fill" aria-hidden="true" /> Open to cloud infrastructure roles</p>
                   <dl>
                     <div><dt><MapPin aria-hidden="true" /> 주소</dt><dd>서울시 송파구 오금동</dd></div>
@@ -942,7 +1035,7 @@ export function App() {
 
           <div className="terminal-drawer">
             <span><CaretDown weight="bold" aria-hidden="true" /> TERMINAL</span>
-            <span className="terminal-output">portfolio.log — viewing /{activeSection}</span>
+            <span className="terminal-output" key={activeSection}>portfolio.log — viewing /{activeSection}</span>
           </div>
         </main>
       </div>
