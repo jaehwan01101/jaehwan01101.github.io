@@ -395,7 +395,6 @@ function ProjectCard({ project }) {
   return (
     <article
       className={`project-card ${expanded ? "is-expanded" : ""}`}
-      data-reveal
     >
       <div className="project-heading">
         <div>
@@ -657,45 +656,6 @@ export function App() {
   }, []);
 
   useEffect(() => {
-    const editor = editorRef.current;
-    if (!editor) return undefined;
-
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const revealTargets = [...editor.querySelectorAll("[data-reveal]")];
-    const revealTarget = (target) => {
-      target.classList.add("is-revealed");
-      target.style.setProperty("--reveal-y", "0px");
-      target.style.setProperty("--reveal-scale", "1");
-      target.style.opacity = "1";
-      target.style.filter = "none";
-    };
-
-    if (reduceMotion || !("IntersectionObserver" in window)) {
-      revealTargets.forEach(revealTarget);
-      return undefined;
-    }
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        revealTarget(entry.target);
-        observer.unobserve(entry.target);
-      });
-    }, {
-      root: editor,
-      rootMargin: "0px 0px -2% 0px",
-      threshold: 0.04,
-    });
-
-    revealTargets.forEach((target, index) => {
-      target.style.setProperty("--reveal-order", String(index % 4));
-      observer.observe(target);
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
     const onKeyDown = (event) => {
       if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
         event.preventDefault();
@@ -830,7 +790,7 @@ export function App() {
             <section id="profile" className={`editor-section profile-section ${activeSection === "profile" ? "is-section-active" : ""}`} aria-labelledby="profile-title">
               <LineRail start={1} count={26} />
               <div className="section-content profile-grid">
-                <div className="profile-copy" data-reveal>
+                <div className="profile-copy">
                   <p className="terminal-prompt"><span>root@devconsole</span>:~$ ./whoami.sh</p>
                   <p className="eyebrow">PROFILE / CLOUD INFRASTRUCTURE</p>
                   <h1 id="profile-title" aria-label="김재환 — 클라우드 & 인프라 엔지니어">
@@ -879,7 +839,6 @@ export function App() {
 
                 <figure
                   className="profile-file"
-                  data-reveal
                   onPointerMove={trackSurfacePointer}
                   onPointerLeave={resetSurfacePointer}
                 >
@@ -901,13 +860,13 @@ export function App() {
             <section id="experience" className={`editor-section experience-section ${activeSection === "experience" ? "is-section-active" : ""}`} aria-labelledby="experience-title">
               <LineRail start={27} count={26} />
               <div className="section-content">
-                <div className="section-heading" data-reveal>
+                <div className="section-heading">
                   <div><p className="eyebrow">GROWTH.LOG</p><h2 id="experience-title">성장 과정</h2></div>
                   <span className="section-command">$ tail -f growth.log</span>
                 </div>
                 <div className="timeline">
                   {experience.map((item) => (
-                    <article className="timeline-item" key={item.index} data-reveal>
+                    <article className="timeline-item" key={item.index}>
                       <div className="timeline-index"><span>{item.index}</span></div>
                       <div className="timeline-copy">
                         <p className="timeline-role">{item.role}</p>
@@ -930,7 +889,7 @@ export function App() {
             <section id="projects" className={`editor-section projects-section ${activeSection === "projects" ? "is-section-active" : ""}`} aria-labelledby="projects-title">
               <LineRail start={53} count={34} />
               <div className="section-content">
-                <div className="section-heading" data-reveal>
+                <div className="section-heading">
                   <div><p className="eyebrow">PROJECTS.JSON</p><h2 id="projects-title">요구사항을 구현한 프로젝트</h2></div>
                   <span className="section-command">2 verified projects</span>
                 </div>
@@ -943,7 +902,7 @@ export function App() {
             <section id="certifications" className={`editor-section certifications-section ${activeSection === "certifications" ? "is-section-active" : ""}`} aria-labelledby="certifications-title">
               <LineRail start={87} count={18} />
               <div className="section-content">
-                <div className="section-heading" data-reveal>
+                <div className="section-heading">
                   <div><p className="eyebrow">CERTIFICATIONS.MD</p><h2 id="certifications-title">자격 및 준비 현황</h2></div>
                 </div>
                 <div className="certification-workbench">
@@ -961,7 +920,6 @@ export function App() {
                             className={`certification-row is-${certification.state}`}
                             key={certification.name}
                             role="listitem"
-                            data-reveal
                             onPointerMove={trackSurfacePointer}
                             onPointerLeave={resetSurfacePointer}
                           >
@@ -993,21 +951,21 @@ export function App() {
             <section id="contact" className={`editor-section contact-section ${activeSection === "contact" ? "is-section-active" : ""}`} aria-labelledby="contact-title">
               <LineRail start={105} count={22} />
               <div className="section-content contact-grid">
-                <div data-reveal>
+                <div>
                   <p className="terminal-prompt"><span>visitor@portfolio</span>:~$ open contact.txt</p>
                   <p className="eyebrow">STRENGTHS / CONTACT</p>
                   <h2 id="contact-title">저는 이러한 강점을 가진 엔지니어입니다.</h2>
                   <p className="strengths-intro">기술을 깊이 이해하고, 사람들과 함께 더 나은 결과를 만들며, 고객에게 전달되는 가치를 먼저 생각합니다.</p>
                   <ul className="strength-list" aria-label="김재환의 강점">
-                    <li data-reveal>
+                    <li>
                       <strong>학습 의지</strong>
                       <span>기술을 사용하는 데 그치지 않고 작동 원리와 세부 구조를 계속 파고들어 이해합니다. 관련 도서를 꾸준히 읽으며 배운 지식을 더 깊고 넓게 확장합니다.</span>
                     </li>
-                    <li data-reveal>
+                    <li>
                       <strong>협업 능력</strong>
                       <span>편안하게 의견을 나눌 수 있는 분위기를 만들고, 서로 다른 관점을 경청해 팀이 실행할 수 있는 합의점으로 조율합니다.</span>
                     </li>
-                    <li data-reveal>
+                    <li>
                       <strong>고객 우선</strong>
                       <span>기술적 선택이 최종 사용자에게 미치는 영향과 경험을 먼저 살피고, 고객에게 더 안정적이고 편리한 결과를 만드는 방향으로 결정합니다.</span>
                     </li>
@@ -1015,7 +973,6 @@ export function App() {
                 </div>
                 <div
                   className="contact-card"
-                  data-reveal
                   onPointerMove={trackSurfacePointer}
                   onPointerLeave={resetSurfacePointer}
                 >
